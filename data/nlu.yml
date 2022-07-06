@@ -90,3 +90,46 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+  
+- intent: courses
+  examples: |
+      - what different courses are offered
+      - different courses provided by the university
+      - list of different courses
+      - list of different programs
+      - can you help me with the programs Chandigarh university offers
+      - different programs offered by the University
+      - different training programs offered
+- intent: my_name_is
+  examples: |
+    - [Shariq Ayaz] (person)
+    - I am [Areesha] (person)
+    - I am [Ashna] (person)
+    - I'm [Aliyah] (person)
+    - I am [Rahil Inzamam] (person)
+    - My name is [Jamal Anjum] (person)
+    - My name is [Nazin] (person)
+    - I am [Sana] (person)
+    - Myself [Ahad] (person)
+    - This side [Samad] (person)
+- intent: ask_apply_online
+  examples: |
+    - Can I apply online?
+    - How can I apply online?
+    - Online application process
+    - Online application procedure
+    - What is online application process?
+    - Can you tell me the online application process?
+    - Is it possible to apply online?
+    - Is there any way to apply online?
+    - Can you please help me with the process of online application?
+- intent: ask_placements
+  examples: |
+    - placement offers
+    - what are the previous placement offers?
+    - different placement offers offered to students
+    - different companies offers
+    - different placement offered
+    - previous placement offers
+    - what are the different placement offers offered to students
+    - student's placement offers
