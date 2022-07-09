@@ -11,6 +11,7 @@ intents:
 - mood_unhappy
 - bot_challenge
 - courses
+- show_courses
 - my_name_is
 - ask_apply_online
 - ask_placements
@@ -30,3 +31,4 @@ responses:
   - text: I am a bot, powered by Rasa.
 actions:
 - action_check_courses
+- action_show_courses

@@ -36,3 +36,19 @@ stories:
   - action: utter_greet
   - intent: courses
   - action: action_check_courses
+
+- story: show courses path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: show_courses
+  - action: action_show_courses
+
+- story: show courses path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: courses
+  - action: action_check_courses
+  - intent: show_courses
+  - action: action_show_courses

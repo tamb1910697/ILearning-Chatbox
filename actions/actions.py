@@ -47,6 +47,20 @@ class ActionCheckCourses(Action):
             data = json.loads(response.content)
             message += ', '.join(list(map(lambda x: x["name"], data["data"][:3])))
 
-        dispatcher.utter_message(text=message)
+        json_message = {"text": message, "link": {"url": "http://localhost:8000/courses", "title": "Show more"}}
+        dispatcher.utter_message(json_message=json_message)
+
+        return []
+
+
+class ActionShowCourses(Action):
+
+    def name(self) -> Text:
+        return "action_show_courses"
+
+    async def run(
+            self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        response = requests.post(f"{url}/show-courses")
 
         return []
