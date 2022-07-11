@@ -4,20 +4,158 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - greet
+- thankyou
 - goodbye
 - affirm
 - deny
 - mood_great
 - mood_unhappy
 - bot_challenge
+- my_name_is
 - courses
 - show_courses
-- my_name_is
 - ask_apply_online
 - ask_placements
+entities:
+- using_what
+- name
+- passcode
+- email
+- password
+- card_no
+- card_type
+- active_new_card
+- active_cancelled_card
+- necessary_item
+- user_wants
+- help_asking_time
+- question_yes_no
+- num_trans
+- bank_name
+- ab
+- course_category
+- course_programming_language
+slots:
+  access:
+    type: categorical
+    influence_conversation: true
+    values:
+    - none
+    - '0'
+    - '1'
+  service_access:
+    type: categorical
+    influence_conversation: true
+    values:
+    - none
+    - '0'
+    - '1'
+  email:
+    type: text
+    influence_conversation: true
+  password:
+    type: text
+    influence_conversation: true
+  passcode:
+    type: text
+    influence_conversation: true
+  name:
+    type: text
+    influence_conversation: true
+  card_replace_with:
+    type: text
+    influence_conversation: true
+  card_permission:
+    type: text
+    influence_conversation: true
+  card_perm:
+    type: text
+    influence_conversation: true
+  question_yes_no:
+    type: text
+    influence_conversation: true
+  using_what:
+    type: text
+    influence_conversation: true
+  card_status:
+    type: categorical
+    influence_conversation: true
+    values:
+    - none
+    - '0'
+    - '1'
+  address1:
+    type: text
+    influence_conversation: true
+  address2:
+    type: text
+    influence_conversation: true
+  new_username:
+    type: text
+    influence_conversation: true
+  last_otp:
+    type: text
+    influence_conversation: true
+  got_otp:
+    type: text
+    influence_conversation: true
+  username:
+    type: text
+    influence_conversation: true
+  new_passcode:
+    type: text
+    influence_conversation: true
+  new_password:
+    type: text
+    influence_conversation: true
+  contact:
+    type: text
+    influence_conversation: true
+  num_trans:
+    type: text
+    influence_conversation: true
+  transfer_perm:
+    type: text
+    influence_conversation: true
+  where:
+    type: text
+    influence_conversation: true
+  amount:
+    type: text
+    influence_conversation: true
+  card_type:
+    type: text
+    influence_conversation: true
+  bank_name:
+    type: text
+    influence_conversation: true
+  ab:
+    type: text
+    influence_conversation: true
 responses:
   utter_greet:
+  - text: I'm here!
   - text: Hey! How are you?
+  - text: Hey, {name}. How is your day going?
+  - text: Are you OK?
+  - text: Hi. How are you?
+  - text: How’s it going?
+  - text: Good to see you
+  - text: Long-time no see
+  - text: Good Morning
+  - text: Good Afternoon
+  - text: Good Evening
+  - text: Lovely to see you
+  - text: Hello. How are you doing?
+  - text: Hello. How have you been?
+  - text: Hello. How’s your day going so far?
+  - text: Hello. How’s it going?
+  - text: Hello. How are things?
+  - text: I’m glad to see you.
+  - text: How are you doing today?
+  - text: What have you been up to?
+  - text: How are you feeling today?
+  - text: Nice to see you again.
   utter_cheer_up:
   - image: https://i.imgur.com/nGF1K8f.jpg
     text: 'Here is something to cheer you up:'
@@ -26,9 +164,45 @@ responses:
   utter_happy:
   - text: Great, carry on!
   utter_goodbye:
-  - text: Bye
+  - text: See you soon!
+  - text: Bye-bye!
+  - text: Till next time!
+  - text: Bye.
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  utter_how_i_help:
+  - text: Is there something I can do for you?
+  - text: How may I assist you?
+  - text: Want me to help you with something?
+  - text: Let me know maybe I can see what I can do.
+  - text: Feel free to ask me if you need something.
+  - text: Need some help?
+  - text: Here, let me give you a hand.
+  - text: Leave it to me, I will take care.
+  - text: I'll hold it for you.
+  - text: Tell me what I can do.
+  - text: Please, just ask, okay?
+  - text: I'm going via your parents' place; want to give me something for them?
+  utter_you_are_welcome:
+  - text: You are welcome.
+  - text: My pleasure
+  - text: I’m happy to help
+  - text: I’m glad to help
+  - text: I’m happy to be of assistance
+  - text: Happy to be of service
+  - text: I’m sure you’d do the same for me
+  - text: It was nothing. I glad can make you happy.
+  - text: No problem
+  - text: It’s no trouble
+  - text: Anytime no problem.
+  - text: Sure
+  - text: Sure thing
+  - text: No worries
+  - text: Don’t worry about it
+  - text: Don’t mention it
+  - text: No big deal
+  utter_check_courses:
+  - text: utter_check_courses
 actions:
 - action_check_courses
 - action_show_courses

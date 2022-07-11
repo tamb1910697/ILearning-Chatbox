@@ -15,6 +15,29 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - Hey! How are you?
+    - Hey, Omori. How is your day going?
+    - Are you OK?
+    - Hi. How are you?
+    - How’s it going?
+    - Good to see you
+    - Long-time no see
+    - Good Morning
+    - Good Afternoon
+    - Good Evening
+    - Lovely to see you
+    - Hello. How are you doing?
+    - Hello. How have you been?
+    - Hello. How’s your day going so far?
+    - Hello. How’s it going?
+    - Hello. How are things?
+    - I’m glad to see you.
+    - How are you doing today?
+    - What have you been up to?
+    - How are you feeling today?
+    - Nice to see you again.
+    - Hi
+    - Hello
 - intent: goodbye
   examples: |
     - good afternoon
@@ -36,7 +59,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-    - I'm fine!
 - intent: deny
   examples: |
     - no
@@ -62,6 +84,9 @@ nlu:
     - so so perfect
     - so good
     - so perfect
+    - i'm fine
+    - I'm fine
+    - pretty awesome
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -93,18 +118,39 @@ nlu:
     - can you help me with the programs Chandigarh university offers
     - different programs offered by the University
     - different training programs offered
+    - Please find for me some [Python](course_programming_language) courses on your website
+    - Please list some [PHP](course_programming_language) courses for me
+    - Please search for me some [C++](course_programming_language) courses
+    - Can you help me find some courses on the website?
+    - Does your website has any [Java](course_programming_language) courses?
+    - Can you list some courses on your website?
+    - Could you provide me some [Swift](course_programming_language) courses?
+    - Can you find some Kotlin courses for me?
+    - Can you search some [Java](course_programming_language) courses for me?
+    - Can you help me find some [Kotlin](course_programming_language) courses on the website?
+    - Can you search some [development](course_category) courses?
+    - Please suggest some [mobile](course_category) courses for me
+    - Can you list some [web] courses on your website?
+    - Can you help me find some [machine learning](course_category) courses on the website?
+    - Can you find some [Development](course_category) courses?
+    - Can you find some [development](course_category) courses?
+    - Can you find some [Java](course_programming_language) courses for me?
+    - Can you help me find some [Python](course_programming_language) courses on the website?
+    - Can you help me find [Development](course_category) courses on the website?
+    - - Can you help me find [Development](course_category) courses on the website?
+    - Can you help me find some [Development](course_category) courses on the website?
 - intent: my_name_is
   examples: |
-    - [Shariq Ayaz] (person)
-    - I am [Areesha] (person)
-    - I am [Ashna] (person)
-    - I'm [Aliyah] (person)
-    - I am [Rahil Inzamam] (person)
-    - My name is [Jamal Anjum] (person)
-    - My name is [Nazin] (person)
-    - I am [Sana] (person)
-    - Myself [Ahad] (person)
-    - This side [Samad] (person)
+    - [Shariq Ayaz](name)
+    - I am [Areesha](name)
+    - I am [Ashna](name)
+    - I'm [Aliyah](name)
+    - I am [Rahil Inzamam](name)
+    - My name is [Jamal Anjum](name)
+    - My name is [Nazin](name)
+    - I am [Sana](name)
+    - Myself [Ahad](name)
+    - This side [Samad](name)
 - intent: ask_apply_online
   examples: |
     - Can I apply online?
@@ -131,3 +177,14 @@ nlu:
     - Please show me the courses on your website
     - Can you show me the courses on your website?
     - Can you go to the courses page?
+    - Please show more
+- intent: thankyou
+  examples: |
+    - Thank you so much.
+    - Thank you very much.
+    - Many thanks for your good support.
+    - I am grateful for your useful guideline.
+    - You are the best.
+    - Thank you for taking the time to tell me help me find the courses.
+    - OK! Tks
+    - Tks for your help
