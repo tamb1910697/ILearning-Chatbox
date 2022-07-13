@@ -38,6 +38,7 @@ nlu:
     - Nice to see you again.
     - Hi
     - Hello
+    - Good afternoon!
 - intent: goodbye
   examples: |
     - good afternoon
@@ -51,6 +52,7 @@ nlu:
     - see you around
     - bye bye
     - see you later
+    - See you later
 - intent: affirm
   examples: |
     - yes
@@ -118,27 +120,33 @@ nlu:
     - can you help me with the programs Chandigarh university offers
     - different programs offered by the University
     - different training programs offered
-    - Please find for me some [Python](course_programming_language) courses on your website
-    - Please list some [PHP](course_programming_language) courses for me
-    - Please search for me some [C++](course_programming_language) courses
+    - Please find for me some [Python](course_keyword) courses on your website
+    - Please list some [PHP](course_keyword) courses for me
+    - Please search for me some [C++](course_keyword) courses
     - Can you help me find some courses on the website?
-    - Does your website has any [Java](course_programming_language) courses?
+    - Does your website has any [Java](course_keyword) courses?
     - Can you list some courses on your website?
-    - Could you provide me some [Swift](course_programming_language) courses?
+    - Could you provide me some [Swift](course_keyword) courses?
     - Can you find some Kotlin courses for me?
-    - Can you search some [Java](course_programming_language) courses for me?
-    - Can you help me find some [Kotlin](course_programming_language) courses on the website?
-    - Can you search some [development](course_category) courses?
-    - Please suggest some [mobile](course_category) courses for me
+    - Can you search some [Java](course_keyword) courses for me?
+    - Can you help me find some [Kotlin](course_keyword) courses on the website?
+    - Can you search some [development](course_keyword) courses?
+    - Please suggest some [mobile](course_keyword) courses for me
     - Can you list some [web] courses on your website?
-    - Can you help me find some [machine learning](course_category) courses on the website?
-    - Can you find some [Development](course_category) courses?
-    - Can you find some [development](course_category) courses?
-    - Can you find some [Java](course_programming_language) courses for me?
-    - Can you help me find some [Python](course_programming_language) courses on the website?
-    - Can you help me find [Development](course_category) courses on the website?
-    - - Can you help me find [Development](course_category) courses on the website?
-    - Can you help me find some [Development](course_category) courses on the website?
+    - Can you help me find some [machine learning](course_keyword) courses on the website?
+    - Can you find some [Development](course_keyword) courses?
+    - Can you find some [development](course_keyword) courses?
+    - Can you find some [Java](course_keyword) courses for me?
+    - Can you help me find some [Python](course_keyword) courses on the website?
+    - Can you help me find [Development](course_keyword) courses on the website?
+    - - Can you help me find [Development](course_keyword) courses on the website?
+    - Can you help me find some [Development](course_keyword) courses on the website?
+    - What are some [Web](course_keyword) courses on your website?
+    - What are some [Java](course_keyword) courses on your website?
+    - What are some [web](course_keyword) courses on your website?
+    - What are some [machine learning](course_keyword) courses on your website?
+    - What are some [development](course_keyword) courses on your website?
+    - Can you help me find some [Python](course_keyword) courses?
 - intent: my_name_is
   examples: |
     - [Shariq Ayaz](name)
@@ -178,6 +186,7 @@ nlu:
     - Can you show me the courses on your website?
     - Can you go to the courses page?
     - Please show more
+    - Can you show more please?
 - intent: thankyou
   examples: |
     - Thank you so much.
@@ -188,3 +197,4 @@ nlu:
     - Thank you for taking the time to tell me help me find the courses.
     - OK! Tks
     - Tks for your help
+    - Thank you very much!

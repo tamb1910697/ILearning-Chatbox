@@ -120,3 +120,17 @@ stories:
   - action: utter_you_are_welcome
   - intent: goodbye
   - action: utter_goodbye
+- story: Story from Conversation ID cf2f238968c54c6c8f5be7d7167701ce
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: courses
+    entities:
+    - course_programming_language: Python
+  - action: action_check_courses
+  - intent: show_courses
+  - action: action_show_courses
+  - intent: thankyou
+  - action: utter_you_are_welcome
+  - intent: goodbye
+  - action: utter_goodbye

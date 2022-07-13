@@ -33,9 +33,12 @@ entities:
 - num_trans
 - bank_name
 - ab
-- course_category
+- course_keyword
 - course_programming_language
 slots:
+  course_keyword:
+    type: list
+    influence_conversation: true
   access:
     type: categorical
     influence_conversation: true

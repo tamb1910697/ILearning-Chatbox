@@ -11,6 +11,8 @@ import json
 from typing import Any, Text, Dict, List
 
 import requests
+from requests.models import PreparedRequest
+
 from rasa_sdk import Action, Tracker
 
 url = "http://localhost:8000/chatbox"
@@ -39,33 +41,36 @@ class ActionCheckCourses(Action):
     async def run(
             self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        category = None
+        keywords = []
 
         # Search with category
         for entity in tracker.latest_message["entities"]:
-            if entity["entity"] == "course_category":
-                category = entity["value"]
+            if entity["entity"] == "course_keyword":
+                keywords.append(entity["value"])
 
         # Params for query
         params = {}
-        if category is not None:
-            params["cats[]"] = [category]
+        if keywords is not None:
+            params["keywords[]"] = keywords
 
         response = requests.get(f"{url}/courses", params=params)
         message = "Something went wrong!"
         if response.ok:
             data = json.loads(response.content)
             if len(data["data"]) == 0:
-                if category is not None:
-                    message = "Sorry there is no courses for %s" % category
+                if keywords is not None:
+                    message = "Sorry there is no courses for %s" % ', '.join(keywords)
                 else:
                     message = "Sorry there is no such courses"
             else:
-                c = category + " " if category is not None else ""
+                c = ', '.join(keywords) + " " if keywords is not None else ""
                 message = f"Here are some {c}courses for you: "
-                message += ', '.join(list(map(lambda x: x["name"], data["data"][:3])))
+                message += ', '.join(data["data"][:3])
 
-        json_message = {"text": message, "link": {"url": "http://localhost:8000/courses", "title": "Show more"}}
+        req = PreparedRequest()
+        req.prepare_url("http://localhost:8000/courses", params)
+
+        json_message = {"text": message, "link": {"url": req.url, "title": "Show more"}}
         dispatcher.utter_message(json_message=json_message)
 
         return []
@@ -79,7 +84,14 @@ class ActionShowCourses(Action):
     async def run(
             self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        json_message = {"text": "Here you are", "redirect": {"url": "http://localhost:8000/courses"}}
+        keywords = tracker.get_slot("course_keyword")
+        if keywords is not None and not isinstance(keywords, list):
+            # noinspection PyTypeChecker
+            keywords = list(keywords)
+        params = {"keywords[]": keywords}
+        req = PreparedRequest()
+        req.prepare_url("http://localhost:8000/courses", params)
+        json_message = {"text": "Here you are", "redirect": {"url": req.url}}
 
         dispatcher.utter_message(json_message=json_message)
 
