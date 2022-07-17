@@ -126,7 +126,7 @@ stories:
   - action: utter_greet
   - intent: courses
     entities:
-    - course_programming_language: Python
+    - course_keyword: Python
   - action: action_check_courses
   - intent: show_courses
   - action: action_show_courses
@@ -134,3 +134,153 @@ stories:
   - action: utter_you_are_welcome
   - intent: goodbye
   - action: utter_goodbye
+- story: Story from Conversation ID 6b3918417a5745bf9586b7e0b5b0c738
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: show_courses
+  - action: action_show_courses
+  - intent: courses
+  - action: action_check_courses
+  - slot_was_set:
+    - recent_courses:
+      - Learn Java Programming | Video Tutorial for Beginners
+      - Python Tutorial for Beginners
+      - Web development with Java Sprint Boot
+  - intent: enroll_course
+    entities:
+    - course_name: Python Tutorial for Beginners
+  - action: action_enroll_course
+  - slot_was_set:
+    - pending_action: action_enroll_course
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: email
+    entities:
+    - email: guys@gmail.com
+  - slot_was_set:
+    - email: guys@gmail.com
+  - action: login_form
+  - slot_was_set:
+    - email: guys@gmail.com
+  - slot_was_set:
+    - requested_slot: password
+  - intent: password
+    entities:
+    - password: password123
+  - slot_was_set:
+    - password: password123
+  - action: login_form
+  - slot_was_set:
+    - password: password123
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_get_access
+  - slot_was_set:
+    - access: 5|nNkkNzEAmCpi4gWH79HBY2YbhyZb19BGc1ZceTL8
+  - slot_was_set:
+    - name: guys
+  - slot_was_set:
+    - requested_slot: null
+- story: Story from Conversation ID 0152d07687444cb18e358f517617ead4
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: courses
+  - action: action_check_courses
+  - slot_was_set:
+    - recent_courses:
+      - Learn Java Programming | Video Tutorial for Beginners
+      - Python Tutorial for Beginners
+      - Web development with Java Sprint Boot
+  - intent: enroll_course
+    entities:
+    - course_name: Python Tutorial for Beginners
+  - action: action_enroll_course
+  - slot_was_set:
+    - pending_action: action_enroll_course
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: email
+    entities:
+    - email: guys@gmail.com
+  - slot_was_set:
+    - email: guys@gmail.com
+  - action: login_form
+  - slot_was_set:
+    - email: guys@gmail.com
+  - slot_was_set:
+    - requested_slot: password
+  - intent: password
+    entities:
+    - password: password123
+  - slot_was_set:
+    - password: password123
+  - action: login_form
+  - slot_was_set:
+    - password: password123
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_get_access
+  - slot_was_set:
+    - access: 5|nNkkNzEAmCpi4gWH79HBY2YbhyZb19BGc1kswer8
+  - slot_was_set:
+    - name: guys
+- story: Story from Conversation ID 3ae31d7cdb674e1085fe427cbfde6218
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: courses
+  - action: action_check_courses
+  - slot_was_set:
+    - recent_courses:
+      - Learn Java Programming | Video Tutorial for Beginners
+      - Python Tutorial for Beginners
+      - Web development with Java Sprint Boot
+  - intent: enroll_course
+    entities:
+    - course_name: Web development with Java Sprint
+    - course_name: Boot
+  - slot_was_set:
+    - course_name: Boot
+  - action: action_enroll_course
+  - slot_was_set:
+    - pending_action: action_enroll_course
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: email
+    entities:
+    - email: guys@gmail.com
+  - slot_was_set:
+    - email: guys@gmail.com
+  - action: login_form
+  - slot_was_set:
+    - email: guys@gmail.com
+  - slot_was_set:
+    - requested_slot: password
+  - intent: password
+    entities:
+    - password: password123
+  - slot_was_set:
+    - password: password123
+  - action: login_form
+  - slot_was_set:
+    - password: password123
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_get_access
+  - slot_was_set:
+    - access_token: 21|IVkKG0uLDStVBzWfS4jLh6dALRX5CIKQyJoBughT
+  - slot_was_set:
+    - name: guys
+  - slot_was_set:
+    - pending_action: null

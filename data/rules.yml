@@ -11,3 +11,21 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Say about us anytime user ask about_us
+  steps:
+  - intent: about_us
+  - action: utter_about_us
+
+- rule: Submit login form
+  condition:
+  # Condition that form is active.
+  - active_loop: login_form
+  steps:
+  # Form is deactivated
+  - action: login_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_get_access

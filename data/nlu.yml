@@ -39,6 +39,7 @@ nlu:
     - Hi
     - Hello
     - Good afternoon!
+    - Good afternoon
 - intent: goodbye
   examples: |
     - good afternoon
@@ -53,6 +54,7 @@ nlu:
     - bye bye
     - see you later
     - See you later
+    - See you tomorrow
 - intent: affirm
   examples: |
     - yes
@@ -111,42 +113,111 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-- intent: courses
+- intent: about_us
   examples: |
-    - what different courses are offered
-    - different courses provided by the university
-    - list of different courses
-    - list of different programs
-    - can you help me with the programs Chandigarh university offers
-    - different programs offered by the University
-    - different training programs offered
-    - Please find for me some [Python](course_keyword) courses on your website
-    - Please list some [PHP](course_keyword) courses for me
-    - Please search for me some [C++](course_keyword) courses
-    - Can you help me find some courses on the website?
-    - Does your website has any [Java](course_keyword) courses?
-    - Can you list some courses on your website?
-    - Could you provide me some [Swift](course_keyword) courses?
-    - Can you find some Kotlin courses for me?
-    - Can you search some [Java](course_keyword) courses for me?
-    - Can you help me find some [Kotlin](course_keyword) courses on the website?
-    - Can you search some [development](course_keyword) courses?
-    - Please suggest some [mobile](course_keyword) courses for me
-    - Can you list some [web] courses on your website?
-    - Can you help me find some [machine learning](course_keyword) courses on the website?
-    - Can you find some [Development](course_keyword) courses?
-    - Can you find some [development](course_keyword) courses?
-    - Can you find some [Java](course_keyword) courses for me?
-    - Can you help me find some [Python](course_keyword) courses on the website?
-    - Can you help me find [Development](course_keyword) courses on the website?
-    - - Can you help me find [Development](course_keyword) courses on the website?
-    - Can you help me find some [Development](course_keyword) courses on the website?
-    - What are some [Web](course_keyword) courses on your website?
-    - What are some [Java](course_keyword) courses on your website?
-    - What are some [web](course_keyword) courses on your website?
-    - What are some [machine learning](course_keyword) courses on your website?
-    - What are some [development](course_keyword) courses on your website?
-    - Can you help me find some [Python](course_keyword) courses?
+    - What is your website about?
+    - What your website provide?
+    - About your website
+    - What I can do on your website?
+    - What is the main feature of your website?
+    - Features of your website
+    - Function of your website
+    - Can you tell me what is your website about?
+- intent: courses
+  examples:
+  - text: |
+      what different courses are offered
+  - text: |
+      different courses provided by the university
+  - text: |
+      list of different courses
+  - text: |
+      list of different programs
+  - text: |
+      can you help me with the programs Chandigarh university offers
+  - text: |
+      different programs offered by the University
+  - text: |
+      different training programs offered
+  - text: |
+      Please find for me some [Python](course_keyword) courses on your website
+  - text: |
+      Please list some [PHP](course_keyword) courses for me
+  - text: |
+      Please search for me some [C++](course_keyword) courses
+  - text: |
+      Can you help me find some courses on the website?
+  - text: |
+      Does your website has any [Java](course_keyword) courses?
+  - text: |
+      Can you list some courses on your website?
+  - text: |
+      Could you provide me some [Swift](course_keyword) courses?
+  - text: |
+      Can you find some Kotlin courses for me?
+  - text: |
+      Can you search some [Java](course_keyword) courses for me?
+  - text: |
+      Can you help me find some [Kotlin](course_keyword) courses on the website?
+  - text: |
+      Can you search some [development](course_keyword) courses?
+  - text: |
+      Please suggest some [mobile](course_keyword) courses for me
+  - text: |
+      Can you list some [web] courses on your website?
+  - text: |
+      Can you help me find some [machine learning](course_keyword) courses on the website?
+  - text: |
+      Can you find some [Development](course_keyword) courses?
+  - text: |
+      Can you find some [development](course_keyword) courses?
+  - text: |
+      Can you find some [Java](course_keyword) courses for me?
+  - text: |
+      Can you help me find some [Python](course_keyword) courses on the website?
+  - text: |
+      Can you help me find [Development](course_keyword) courses on the website?
+  - text: |
+      - Can you help me find [Development](course_keyword) courses on the website?
+  - text: |
+      Can you help me find some [Development](course_keyword) courses on the website?
+  - text: |
+      What are some [Web](course_keyword) courses on your website?
+  - text: |
+      What are some [Java](course_keyword) courses on your website?
+  - text: |
+      What are some [web](course_keyword) courses on your website?
+  - text: |
+      What are some [machine learning](course_keyword) courses on your website?
+  - text: |
+      What are some [development](course_keyword) courses on your website?
+  - text: |
+      Can you help me find some [Python](course_keyword) courses?
+  - text: |
+      Grate! But can you help me find some [Java](course_keyword) or [Python](course_keyword) courses?
+  - text: |
+      Grate! But can you help me find some [machine learning](course_keyword) courses?
+  - text: |
+      How about [Java](course_keyword) courses?
+  - text: |
+      Can you find some [Java](course_keyword) or [Python](course_keyword) courses for me?
+  - text: |
+      Can you find some [Java](course_keyword) or [Web](course_keyword) courses for me?
+  - text: |
+      What courses on your website?
+  - text: |
+      List courses on your website, please
+  - text: |
+      I want to buy [Web development with Java Sprint
+        Boot](course_name)
+  - text: |
+      Please list some courses
+  - text: |
+      List some courses, please?
+  - text: |
+      Can you please list me some course?
+  - text: |
+      Can show give me some courses?
 - intent: my_name_is
   examples: |
     - [Shariq Ayaz](name)
@@ -187,6 +258,24 @@ nlu:
     - Can you go to the courses page?
     - Please show more
     - Can you show more please?
+    - Please show me
+    - Show me courses
+- intent: enroll_course
+  examples: |
+    - Please take this course for me
+    - I want to learn this course
+    - I want to buy the [Python Tutorial](course_name) course
+    - I want to enroll the [Java Tutorial for Beginner](course_name) course
+    - Please take the [PHP Web Development](course_name) for me
+    - I will choose the [Java Spring Boot](course_name)
+    - I want to enroll the [Python Tutorial for Newbie](course_name) for Beginners course
+    - I want to enroll [PHP for Beginner](course_name) course
+    - I  want to buy [Web Development with Java Sprint Boot](course_name)
+    - I want to enroll the [Python Tutorial for Beginners](course_name) course
+    - I  want to buy [Java Sprint  Boot](course_name)
+    - I want to enroll [Python Tutorial for Beginners](course_name)
+    - I want to enroll [Python Tutorial for Beginners](course_name). Can you help me do that?
+    - OK. I want to enroll the [Python Tutorial for Beginners](course_name) course
 - intent: thankyou
   examples: |
     - Thank you so much.
@@ -198,3 +287,39 @@ nlu:
     - OK! Tks
     - Tks for your help
     - Thank you very much!
+    - Ok tks!
+- intent: email
+  examples: |
+    - [bkjbfk@gmail.com](email)
+    - [342424@gmail.com](email)
+    - [kbajsbd@gmail.com](email)
+    - [naaslsld@gmail.com](email)
+    - [jfjbjfb@gmail.com](email)
+    - [k3432jhvjh@gmail.com](email)
+    - My email is [rose@gmail.com](email)
+    - This is my email: [jisoo@gmail.com](email)
+    - [guys@gmail.com](email)
+    - [lisa@gmail.com](email)
+    - [jennie@gmail.com](email)
+    - [jisoo@gmail.com](email)
+- intent: password
+  examples: |
+    - [1234](password)
+    - [12345678](password)
+    - [password1](password)
+    - [password123](password)
+    - [computer](password)
+    - [12Bb3242342](password)
+    - [Brijesh123](password)
+    - Here is my password: [brij133bB](password)
+    - This is my password: [1324234gsdD4324](password)
+    - IloveyouLisa
+    - Iloveyou
+    - [123456](password)
+    - [abc123](password)
+- regex: email
+  examples: |
+    - [_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})
+- regex: password
+  examples: |
+    - (((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})

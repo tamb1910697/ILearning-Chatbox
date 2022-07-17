@@ -12,10 +12,14 @@ intents:
 - mood_unhappy
 - bot_challenge
 - my_name_is
+- about_us
 - courses
+- enroll_course
 - show_courses
 - ask_apply_online
 - ask_placements
+- email
+- password
 entities:
 - using_what
 - name
@@ -34,18 +38,29 @@ entities:
 - bank_name
 - ab
 - course_keyword
-- course_programming_language
+- course_name
 slots:
-  course_keyword:
-    type: list
-    influence_conversation: true
-  access:
+  pending_action:
     type: categorical
     influence_conversation: true
     values:
     - none
-    - '0'
-    - '1'
+    - action_enroll_course
+  requested_slot:
+    type: text
+    influence_conversation: false
+  course_keyword:
+    type: list
+    influence_conversation: true
+  course_name:
+    type: text
+    influence_conversation: true
+  recent_courses:
+    type: list
+    influence_conversation: true
+  access_token:
+    type: text
+    influence_conversation: true
   service_access:
     type: categorical
     influence_conversation: true
@@ -135,6 +150,9 @@ slots:
   ab:
     type: text
     influence_conversation: true
+  access:
+    type: unfeaturized
+    influence_conversation: false
 responses:
   utter_greet:
   - text: I'm here!
@@ -206,6 +224,37 @@ responses:
   - text: No big deal
   utter_check_courses:
   - text: utter_check_courses
+  utter_about_us:
+  - text: ILearning is website of multi national online course including thousands of high quality of professors has public courses in various topics that can satisfy the demands of the hardest customer. If you interested in learning new things, I can help you to do that. Just say what you want to learn and I will find suitable course for you.
+  utter_first_access:
+  - text: Please first login to our service to use it.
+  utter_ask_email:
+  - text: 'Please tell me your email:'
+  - text: 'Please tell me your email address:'
+  - text: 'Please tell me your email id:'
+  - text: 'Please give me your email:'
+  - text: 'Please give me your email address:'
+  - text: 'Please give me your email id:'
+  utter_ask_password:
+  - text: 'Please tell me your password:'
+  - text: 'Please give me your password:'
+  utter_access:
+  - text: Whooo! You are logged in. Ask Anything!
+  - text: Looks like you are logged in, Boss!
+  - text: Go ahead, Ask me anything!
+  utter_enroll_succeed:
+  - text: Enroll course successful
+  utter_enroll_failed:
+  - text: Enroll course failed
 actions:
 - action_check_courses
 - action_show_courses
+- action_get_access
+- action_enroll_course
+forms:
+  login_form:
+    required_slots:
+      email:
+      - type: from_text
+      password:
+      - type: from_text
