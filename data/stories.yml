@@ -1,286 +1,557 @@
 version: "2.0"
 stories:
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-- story: happy path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-  - intent: thankyou
-  - action: utter_you_are_welcome
-- story: happy path 3
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
-- story: check courses
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: courses
-  - action: action_check_courses
-- story: check courses full
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: courses
-  - action: action_check_courses
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: show courses path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: show_courses
-  - action: action_show_courses
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: show courses full
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: courses
-  - action: action_check_courses
-  - intent: show_courses
-  - action: action_show_courses
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: Story from Conversation ID 6a7b32a468d04008b0f0a06206aa2222
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-  - intent: goodbye
-  - action: utter_goodbye
-- story: Story from Conversation ID cb09125385dd47558083d158fc12a4a0
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-  - intent: goodbye
-  - action: utter_goodbye
-- story: Story from Conversation ID c80d479f2cdc438489b978c1d2c1f786
-  steps:
-  - intent: show_courses
-  - action: action_show_courses
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: Story from Conversation ID 35a893961c9e496787ee0eeee0cff4e8
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: courses
-  - action: action_check_courses
-  - intent: show_courses
-  - action: action_show_courses
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: Story from Conversation ID cf2f238968c54c6c8f5be7d7167701ce
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: courses
-    entities:
-    - course_keyword: Python
-  - action: action_check_courses
-  - intent: show_courses
-  - action: action_show_courses
-  - intent: thankyou
-  - action: utter_you_are_welcome
-  - intent: goodbye
-  - action: utter_goodbye
-- story: Story from Conversation ID 6b3918417a5745bf9586b7e0b5b0c738
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: show_courses
-  - action: action_show_courses
-  - intent: courses
-  - action: action_check_courses
-  - slot_was_set:
-    - recent_courses:
-      - Learn Java Programming | Video Tutorial for Beginners
-      - Python Tutorial for Beginners
-      - Web development with Java Sprint Boot
-  - intent: enroll_course
-    entities:
-    - course_name: Python Tutorial for Beginners
-  - action: action_enroll_course
-  - slot_was_set:
-    - pending_action: action_enroll_course
-  - action: login_form
-  - active_loop: login_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: email
-    entities:
-    - email: guys@gmail.com
-  - slot_was_set:
-    - email: guys@gmail.com
-  - action: login_form
-  - slot_was_set:
-    - email: guys@gmail.com
-  - slot_was_set:
-    - requested_slot: password
-  - intent: password
-    entities:
-    - password: password123
-  - slot_was_set:
-    - password: password123
-  - action: login_form
-  - slot_was_set:
-    - password: password123
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_get_access
-  - slot_was_set:
-    - access: 5|nNkkNzEAmCpi4gWH79HBY2YbhyZb19BGc1ZceTL8
-  - slot_was_set:
-    - name: guys
-  - slot_was_set:
-    - requested_slot: null
-- story: Story from Conversation ID 0152d07687444cb18e358f517617ead4
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: courses
-  - action: action_check_courses
-  - slot_was_set:
-    - recent_courses:
-      - Learn Java Programming | Video Tutorial for Beginners
-      - Python Tutorial for Beginners
-      - Web development with Java Sprint Boot
-  - intent: enroll_course
-    entities:
-    - course_name: Python Tutorial for Beginners
-  - action: action_enroll_course
-  - slot_was_set:
-    - pending_action: action_enroll_course
-  - action: login_form
-  - active_loop: login_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: email
-    entities:
-    - email: guys@gmail.com
-  - slot_was_set:
-    - email: guys@gmail.com
-  - action: login_form
-  - slot_was_set:
-    - email: guys@gmail.com
-  - slot_was_set:
-    - requested_slot: password
-  - intent: password
-    entities:
-    - password: password123
-  - slot_was_set:
-    - password: password123
-  - action: login_form
-  - slot_was_set:
-    - password: password123
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_get_access
-  - slot_was_set:
-    - access: 5|nNkkNzEAmCpi4gWH79HBY2YbhyZb19BGc1kswer8
-  - slot_was_set:
-    - name: guys
-- story: Story from Conversation ID 3ae31d7cdb674e1085fe427cbfde6218
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: courses
-  - action: action_check_courses
-  - slot_was_set:
-    - recent_courses:
-      - Learn Java Programming | Video Tutorial for Beginners
-      - Python Tutorial for Beginners
-      - Web development with Java Sprint Boot
-  - intent: enroll_course
-    entities:
-    - course_name: Web development with Java Sprint
-    - course_name: Boot
-  - slot_was_set:
-    - course_name: Boot
-  - action: action_enroll_course
-  - slot_was_set:
-    - pending_action: action_enroll_course
-  - action: login_form
-  - active_loop: login_form
-  - slot_was_set:
-    - requested_slot: email
-  - intent: email
-    entities:
-    - email: guys@gmail.com
-  - slot_was_set:
-    - email: guys@gmail.com
-  - action: login_form
-  - slot_was_set:
-    - email: guys@gmail.com
-  - slot_was_set:
-    - requested_slot: password
-  - intent: password
-    entities:
-    - password: password123
-  - slot_was_set:
-    - password: password123
-  - action: login_form
-  - slot_was_set:
-    - password: password123
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_get_access
-  - slot_was_set:
-    - access_token: 21|IVkKG0uLDStVBzWfS4jLh6dALRX5CIKQyJoBughT
-  - slot_was_set:
-    - name: guys
-  - slot_was_set:
-    - pending_action: null
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+  - story: happy path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+      - intent: thankyou
+      - action: utter_you_are_welcome
+  - story: happy path 3
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: sad path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: sad path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_goodbye
+  - story: check courses
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+  - story: check courses full
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: show courses path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_courses
+      - action: action_show_courses
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: show courses full
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - intent: show_courses
+      - action: action_show_courses
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: Story from Conversation ID 6a7b32a468d04008b0f0a06206aa2222
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: Story from Conversation ID cb09125385dd47558083d158fc12a4a0
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: Story from Conversation ID c80d479f2cdc438489b978c1d2c1f786
+    steps:
+      - intent: show_courses
+      - action: action_show_courses
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: Story from Conversation ID 35a893961c9e496787ee0eeee0cff4e8
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - intent: show_courses
+      - action: action_show_courses
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: Story from Conversation ID cf2f238968c54c6c8f5be7d7167701ce
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+        entities:
+          - course_keyword: Python
+      - action: action_check_courses
+      - intent: show_courses
+      - action: action_show_courses
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: Story from Conversation ID 6b3918417a5745bf9586b7e0b5b0c738
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_courses
+      - action: action_show_courses
+      - intent: courses
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Learn Java Programming | Video Tutorial for Beginners
+              - Python Tutorial for Beginners
+              - Web development with Java Sprint Boot
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial for Beginners
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 5|nNkkNzEAmCpi4gWH79HBY2YbhyZb19BGc1ZceTL8
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - requested_slot: null
+  - story: Story from Conversation ID 0152d07687444cb18e358f517617ead4
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Learn Java Programming | Video Tutorial for Beginners
+              - Python Tutorial for Beginners
+              - Web development with Java Sprint Boot
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial for Beginners
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 5|nNkkNzEAmCpi4gWH79HBY2YbhyZb19BGc1kswer8
+      - slot_was_set:
+          - name: guys
+  - story: Story from Conversation ID 3ae31d7cdb674e1085fe427cbfde6218
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Learn Java Programming | Video Tutorial for Beginners
+              - Python Tutorial for Beginners
+              - Web development with Java Sprint Boot
+      - intent: enroll_course
+        entities:
+          - course_name: Web development with Java Sprint
+          - course_name: Boot
+      - slot_was_set:
+          - course_name: Boot
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 21|IVkKG0uLDStVBzWfS4jLh6dALRX5CIKQyJoBughT
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+  - story: Story from Conversation ID b69c8218149641df94eec1cdd43e8080
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial
+      - slot_was_set:
+          - course_name: Python Tutorial
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 29|Mb31moTc4jwnYF7H91exIUg2Aq6wHuWZ2GU1Uja4
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  - story: Story choose likely course short path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial for Beginners
+      - slot_was_set:
+          - course_name: Python Tutorial for Beginners
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 29|Mb31moTc4jwnYF7H91exIUg2Aq6wHuWZ2GU1Uja4
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - likely_course: Python Django
+      - intent: affirm
+      - action: action_enroll_course
+
+  - story: Story choose likely course long path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial for Beginners
+      - slot_was_set:
+          - course_name: Python Tutorial for Beginners
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 29|Mb31moTc4jwnYF7H91exIUg2Aq6wHuWZ2GU1Uja4
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - likely_course: Python Django
+      - intent: affirm
+      - action: action_enroll_course
+
+  - story: interactive_story_enroll_course_not_exist
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial
+      - slot_was_set:
+          - course_name: Python Tutorial
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 34|tibMhnpBIttNtNKCjyXF9d2QLyP7iHAWjRRtDEhN
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - likely_course: Python Django
+      - intent: affirm
+      - action: action_enroll_course
+
+  - story: interactive_story_enroll_course_not_exist_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: enroll_course
+        entities:
+          - course_name: Python Dijan
+      - slot_was_set:
+          - course_name: Python Dijan
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 34|tibMhnpBIttNtNKCjyXF9d2QLyP7iHAWjRRtDEhN
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - likely_course: Python Django
+      - intent: affirm
+      - action: action_enroll_course
+
+  - story: interactive_story_enroll_course_not_exist_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial
+      - slot_was_set:
+          - course_name: Python Tutorial
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_get_access
+      - slot_was_set:
+          - access_token: 35|EVtng8KFjKRvAGJ2FuhFAvWAKE6IWDGzSUgFgg0G
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - likely_course: Python Django
+      - intent: affirm
+      - action: action_enroll_course
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye

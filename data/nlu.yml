@@ -55,6 +55,7 @@ nlu:
     - see you later
     - See you later
     - See you tomorrow
+    - Bye
 - intent: affirm
   examples: |
     - yes
@@ -63,6 +64,7 @@ nlu:
     - of course
     - that sounds good
     - correct
+    - Yes
 - intent: deny
   examples: |
     - no
@@ -218,6 +220,14 @@ nlu:
       Can you please list me some course?
   - text: |
       Can show give me some courses?
+  - text: |
+      Please list some courses for me
+  - text: |
+      Provide some courses please
+  - text: |
+      Provide some [Python](course_keyword) courses
+  - text: |
+      Please provide some [Python](course_keyword) courses
 - intent: my_name_is
   examples: |
     - [Shariq Ayaz](name)
@@ -276,6 +286,12 @@ nlu:
     - I want to enroll [Python Tutorial for Beginners](course_name)
     - I want to enroll [Python Tutorial for Beginners](course_name). Can you help me do that?
     - OK. I want to enroll the [Python Tutorial for Beginners](course_name) course
+    - I want to enroll the [Web development with Java Sprint](course_name)  [Boot](course_name)
+    - I want to enroll the [Python Tutorial](course_name) course
+    - I want to enroll the [Django course](course_name)
+    - I want to enroll the [Python](course_keyword) course
+    - I want to enroll [Python](course_name) Django course
+    - I want to enroll the [Python Tutorial](course_name) course
 - intent: thankyou
   examples: |
     - Thank you so much.
@@ -288,6 +304,7 @@ nlu:
     - Tks for your help
     - Thank you very much!
     - Ok tks!
+    - Thank
 - intent: email
   examples: |
     - [bkjbfk@gmail.com](email)
@@ -302,6 +319,7 @@ nlu:
     - [lisa@gmail.com](email)
     - [jennie@gmail.com](email)
     - [jisoo@gmail.com](email)
+    - [guys@gmail.com](email)
 - intent: password
   examples: |
     - [1234](password)
@@ -317,6 +335,7 @@ nlu:
     - Iloveyou
     - [123456](password)
     - [abc123](password)
+    - [password123](password)
 - regex: email
   examples: |
     - [_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})

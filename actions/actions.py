@@ -130,8 +130,9 @@ class GetAccess(Action):
             if pending_action == EnrollCourse.get_name():
                 # Enroll course
                 # Do not call followup action or it will cause violence with rules
-                EnrollCourse.enroll(dispatcher, tracker, access_token)
-                return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None)]
+                res = EnrollCourse.enroll(dispatcher, tracker, access_token)
+                return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None),
+                        *res]
 
             return [SlotSet("access_token", access_token), SlotSet("name", name), FollowupAction(pending_action)]
 
@@ -170,7 +171,7 @@ class EnrollCourse(Action):
             return [SlotSet("pending_action", EnrollCourse._name()), FollowupAction('login_form')]
 
         # Get the course name user have chosen
-        course_name = tracker.get_slot("course_name")
+        course_name = tracker.get_slot("likely_course") or tracker.get_slot("course_name")
         if course_name is None:
             recent_courses = tracker.get_slot('recent_courses')
             if recent_courses is None or len(recent_courses) == 0:
@@ -180,17 +181,14 @@ class EnrollCourse(Action):
         # Enroll course
         results = EnrollCourse._enroll(course_name, access_token)
 
-        if results is None or not results.ok:
-            dispatcher.utter_message(response="utter_enroll_failed")
-            return [ActionReverted(), AllSlotsReset()]
-
         response = json.loads(results.content)
         # Failed
-        if not response["success"]:
+        if not results.ok or not response["success"]:
             if response["extras"] is not None and len(response["extras"]) > 0:
+                likely_course = response["extras"][0]
                 dispatcher.utter_message(
-                    response["This course not exist on our website. Did you mean " + ', '.join(response["extras"][:3])])
-                return []
+                    text=f"This course not exist on our website. Did you mean {likely_course}")
+                return [SlotSet("likely_course", likely_course)]
             dispatcher.utter_message(response="utter_enroll_failed")
             return []
 
