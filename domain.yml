@@ -11,6 +11,7 @@ intents:
 - bot_challenge
 - courses
 - deny
+- detail_course
 - email
 - enroll_course
 - goodbye
@@ -19,18 +20,17 @@ intents:
 - mood_great
 - mood_unhappy
 - my_name_is
-- nlu_fallback
 - password
 - register
 - show_courses
 - thankyou
 - username
 entities:
+- course_name
 - username
 - password
 - course_keyword
 - email
-- course_name
 - name
 slots:
   pending_action:
@@ -171,6 +171,10 @@ responses:
   - text: The course {course_name} not found on our website. Did you mean {likely_course}
   - text: The course you have choose ({course_name}) is not found. Did you mean {likely_course}
   - text: The course {course_name} does not exist on our website. Did you mean {likely_course}
+  utter_course_not_found:
+  - text: The course {course_name} not found on our website.
+  - text: The course you have choose ({course_name}) is not found.
+  - text: The course {course_name} does not exist on our website.
   utter_instruction_take_course:
   - text: You can take this course by enroll the course. You may need to login to enroll the course. If you do not have any account, you can register an account.
   - text: To take this course you need to login into your account (if you not login yet) and enroll the course. You can create new account if you do not have any account yet.
@@ -182,6 +186,7 @@ responses:
 actions:
 - action_access_and_perform
 - action_check_courses
+- action_detail_course
 - action_enroll_course
 - action_register
 - action_show_courses

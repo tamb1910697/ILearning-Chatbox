@@ -246,6 +246,8 @@ nlu:
       Can you provide some courses?
   - text: |
       How about [PHP](course_keyword) course?
+  - text: |
+      Please provide some courses
 - intent: my_name_is
   examples: |
     - [Shariq Ayaz](name)
@@ -288,6 +290,21 @@ nlu:
     - Can you show more please?
     - Please show me
     - Show me courses
+- intent: detail_course
+  examples: |
+    - Please show me the detail of this course
+    - Please go to detail page of this course
+    - Please show detail of the [PHP Tutorial](course_name) course
+    - I want to view the detail of this course
+    - I want to check the detail of the [Python Tutorial](course_name) course
+    - Please show me the detail
+    - Please show more detail about the course
+    - Please show more about the [Java Tutorial](course_name)
+    - Please show me the detail of the [Python Tutorial for Beginners](course_name) course
+    - Please show me the detail of the [Python Tutorial](course_name) course
+    - Please show me the detail of the [Java Tutorial](course_name) course
+    - Please show more about the [Django](course_name) course
+    - Please go to the detail page of the [Django](course_name) course
 - intent: enroll_course
   examples: |
     - Please take this course for me
@@ -334,6 +351,7 @@ nlu:
     - Thks
     - Thanks so much
     - Thank buddy
+    - Thanks buddy
 - intent: username
   examples: |
     - [rosie](username)
@@ -385,7 +403,6 @@ nlu:
     - [Iloveyou](password)
     - [123456](password)
     - [abc123](password)
-    - [password123](password)
 - intent: register
   examples: |
     - Please create an account for me
@@ -420,9 +437,6 @@ nlu:
     - How can I take the course on your website?
     - How can I buy the [Web development with Java Sprint Boot](course_name) course?
     - How can I learn the [Learn C++ Programming](course_name) course?
-- intent: nlu_fallback
-  examples: |
-    - [Jisoo](username)
 - regex: email
   examples: |
     - [_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})

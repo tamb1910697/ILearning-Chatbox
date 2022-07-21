@@ -638,3 +638,128 @@ stories:
       - action: action_enroll_course
       - intent: thankyou
       - action: utter_you_are_welcome
+
+  - story: Go to detail course short
+    steps:
+      - intent: detail_course
+        entities:
+          - course_name: PHP Web Development Tutorial
+      - slot_was_set:
+          - course_name: PHP Web Development Tutorial
+      - action: action_detail_course
+
+  - story: Go to detail course long
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Web development with Java Sprint Boot
+      - intent: detail_course
+      - action: action_detail_course
+
+  - story: interactive_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Learn Java Programming | Video Tutorial for Beginners
+              - Python Tutorial for Beginners
+              - Web development with Java Sprint Boot
+      - intent: detail_course
+        entities:
+          - course_name: Python Tutorial for Beginners
+      - slot_was_set:
+          - course_name: Python Tutorial for Beginners
+      - action: action_detail_course
+      - intent: thankyou
+      - action: utter_you_are_welcome
+
+  - story: interactive_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Learn Java Programming | Video Tutorial for Beginners
+              - Python Tutorial for Beginners
+              - Web development with Java Sprint Boot
+      - intent: detail_course
+        entities:
+          - course_name: Python Tutorial
+      - slot_was_set:
+          - course_name: Python Tutorial
+      - action: action_detail_course
+      - slot_was_set:
+          - likely_course: Python Tutorial for Beginners
+      - action: utter_course_not_found_and_suggest
+      - intent: affirm
+      - action: action_detail_course
+
+  - story: interactive_story_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: detail_course
+        entities:
+          - course_name: Java Tutorial
+      - slot_was_set:
+          - course_name: Java Tutorial
+      - action: action_detail_course
+
+  - story: interactive_story_3
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: detail_course
+        entities:
+          - course_name: Django
+      - slot_was_set:
+          - course_name: Django
+      - action: action_detail_course
+      - slot_was_set:
+          - likely_course: Python Django
+      - action: utter_course_not_found_and_suggest
+      - intent: affirm
+      - action: action_detail_course
+
+  - story: interactive_story_4
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: detail_course
+        entities:
+          - course_name: PHP
+      - slot_was_set:
+          - course_name: PHP
+      - action: action_detail_course
+      - slot_was_set:
+          - likely_course: PHP Tutorial
+      - action: utter_course_not_found_and_suggest
+      - intent: affirm
+      - action: action_detail_course
+
+  - story: interactive_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: detail_course
+        entities:
+          - course_name: Django
+      - slot_was_set:
+          - course_name: Django
+      - action: action_detail_course
+      - slot_was_set:
+          - likely_course: Python Django
+      - action: utter_course_not_found_and_suggest
+      - intent: affirm
+      - action: action_detail_course
+      - intent: thankyou
+      - action: utter_you_are_welcome

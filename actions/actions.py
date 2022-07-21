@@ -15,23 +15,9 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet, ActionReverted, AllSlotsReset, FollowupAction
 from requests.models import PreparedRequest
 
-api_url = "http://localhost:8000/api"
+base_url = "http://127.0.0.1:8000"
+api_url = "http://127.0.0.1:8000/api"
 
-
-#
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
 
 class ActionCheckCourses(Action):
 
@@ -66,11 +52,11 @@ class ActionCheckCourses(Action):
             else:
                 c = ', '.join(keywords) + " " if keywords is not None else ""
                 message = f"Here are some {c}courses for you: "
-                recent_courses = data["data"][:3]
-                message += ', '.join(data["data"][:3])
+                recent_courses = list(map(lambda x: x["name"], data["data"][:3]))
+                message += ', '.join(list(map(lambda x: x["name"], data["data"][:3])))
 
         req = PreparedRequest()
-        req.prepare_url("http://localhost:8000/courses", params)
+        req.prepare_url(f"{base_url}/courses", params)
 
         json_message = {"text": message, "link": {"url": req.url, "title": "Show more"}}
         dispatcher.utter_message(json_message=json_message)
@@ -92,7 +78,7 @@ class ActionShowCourses(Action):
             keywords = list(keywords)
         params = {"keywords[]": keywords}
         req = PreparedRequest()
-        req.prepare_url("http://localhost:8000/courses", params)
+        req.prepare_url(f"{base_url}/courses", params)
         json_message = {"text": "Here you are", "redirect": {"url": req.url}}
 
         dispatcher.utter_message(json_message=json_message)
@@ -122,7 +108,7 @@ class ActionRegister(Action):
         name = json_res["data"]["name"]
         # personal access token for later request
         access_token = json_res["data"]["token"]
-        
+
         template = "utter_register_succeed"
         dispatcher.utter_message(response=template)
         return [SlotSet("access_token", access_token), SlotSet("name", name)]
@@ -159,7 +145,7 @@ class ActionAccessAndPerform(Action):
         if pending_action is not None:
             if pending_action == EnrollCourse.get_name():
                 # Enroll course
-                # Do not call followup action or it will cause violence with rules
+                # Do not call followup action, or it will cause violence with rules
                 res = EnrollCourse.enroll(dispatcher, tracker, access_token)
                 return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None),
                         *res]
@@ -205,11 +191,10 @@ class EnrollCourse(Action):
         # Check if is valid course
         data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
             "data"]
-        print(data)
         if data["course"] is None:
             if data["extras"] is not None and len(data["extras"]) > 0:
-                likely_course = data["extras"][0]
-                return [SlotSet("likely_course", likely_course), FollowupAction("utter_course_not_found")]
+                likely_course = data["extras"][0]["name"]
+                return [SlotSet("likely_course", likely_course), FollowupAction("utter_course_not_found_and_suggest")]
 
             return [FollowupAction("utter_course_not_found")]
 
@@ -225,7 +210,7 @@ class EnrollCourse(Action):
         # Failed
         if not results.ok or not response["success"]:
             if response["extras"] is not None and len(response["extras"]) > 0:
-                likely_course = response["extras"][0]
+                likely_course = response["extras"][0]["name"]
                 dispatcher.utter_message(
                     text=f"This course not exist on our website. Did you mean {likely_course}")
                 return [SlotSet("likely_course", likely_course)]
@@ -249,3 +234,35 @@ class EnrollCourse(Action):
                                 data={'course_name': course_name},
                                 headers=headers)
         return results
+
+
+class ActionDetailCourse(Action):
+
+    async def run(self, dispatcher, tracker: Tracker, domain) -> List[
+        Dict[Text, Any]]:
+        # Get the course name user have chosen
+        course_name = tracker.get_slot("likely_course") or tracker.get_slot("course_name")
+        if course_name is None:
+            recent_courses = tracker.get_slot('recent_courses')
+            if recent_courses is None or len(recent_courses) == 0:
+                return [FollowupAction("utter_please_choose_course")]
+            course_name = recent_courses[0]
+        # Check if is valid course
+        data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
+            "data"]
+        if data["course"] is None:
+            if data["extras"] is not None and len(data["extras"]) > 0:
+                likely_course = data["extras"][0]["name"]
+                return [SlotSet("likely_course", likely_course), FollowupAction("utter_course_not_found_and_suggest")]
+
+            return [FollowupAction("utter_course_not_found")]
+
+        req = PreparedRequest()
+        req.prepare_url(f"{base_url}/courses/{data['course']['id']}", {})
+        json_message = {"text": "Here you are", "redirect": {"url": req.url}}
+
+        dispatcher.utter_message(json_message=json_message)
+        return []
+
+    def name(self):
+        return "action_detail_course"
