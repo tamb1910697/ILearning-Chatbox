@@ -3,29 +3,35 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- email
-- thankyou
-- greet
-- goodbye
+- about_us
 - affirm
-- password
-- enroll_course
+- ask_apply_online
+- ask_how_to_take_course
+- ask_placements
+- bot_challenge
+- courses
 - deny
+- email
+- enroll_course
+- goodbye
+- greet
+- login
 - mood_great
 - mood_unhappy
-- bot_challenge
 - my_name_is
-- about_us
-- courses
-- show_courses
-- ask_apply_online
-- ask_placements
-entities:
-- course_keyword
-- course_name
-- email
-- name
+- nlu_fallback
 - password
+- register
+- show_courses
+- thankyou
+- username
+entities:
+- username
+- password
+- course_keyword
+- email
+- course_name
+- name
 slots:
   pending_action:
     type: categorical
@@ -49,6 +55,9 @@ slots:
     type: list
     influence_conversation: false
   access_token:
+    type: text
+    influence_conversation: true
+  username:
     type: text
     influence_conversation: true
   email:
@@ -145,25 +154,54 @@ responses:
   utter_ask_password:
   - text: 'Please tell me your password:'
   - text: 'Please give me your password:'
+  utter_ask_username:
+  - text: 'Please tell me your username:'
   utter_access:
   - text: Whooo! You are logged in. Ask Anything!
   - text: Looks like you are logged in, Boss!
   - text: Go ahead, Ask me anything!
+  utter_register_succeed:
+  - text: Register successful
+  - text: Your account has been created
   utter_enroll_succeed:
   - text: Enroll course successful
   utter_enroll_failed:
   - text: Enroll course failed
+  utter_course_not_found_and_suggest:
+  - text: The course {course_name} not found on our website. Did you mean {likely_course}
+  - text: The course you have choose ({course_name}) is not found. Did you mean {likely_course}
+  - text: The course {course_name} does not exist on our website. Did you mean {likely_course}
+  utter_instruction_take_course:
+  - text: You can take this course by enroll the course. You may need to login to enroll the course. If you do not have any account, you can register an account.
+  - text: To take this course you need to login into your account (if you not login yet) and enroll the course. You can create new account if you do not have any account yet.
+  utter_register_failed:
+  - text: Register failed. Please check your input again
+  utter_not_enough_info:
+  - text: Please fill all require field
+  - text: Please check your input again to fill out all require field
 actions:
+- action_access_and_perform
 - action_check_courses
 - action_enroll_course
-- action_get_access
+- action_register
 - action_show_courses
+- utter_course_not_found_and_suggest
 - utter_goodbye
 - utter_greet
+- utter_instruction_take_course
+- utter_register_failed
 - utter_you_are_welcome
 forms:
   login_form:
     required_slots:
+      email:
+      - type: from_text
+      password:
+      - type: from_text
+  register_form:
+    required_slots:
+      username:
+      - type: from_text
       email:
       - type: from_text
       password:

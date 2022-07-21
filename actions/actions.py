@@ -15,7 +15,6 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet, ActionReverted, AllSlotsReset, FollowupAction
 from requests.models import PreparedRequest
 
-url = "http://localhost:8000/chatbox"
 api_url = "http://localhost:8000/api"
 
 
@@ -54,7 +53,7 @@ class ActionCheckCourses(Action):
         if keywords is not None:
             params["keywords[]"] = keywords
 
-        response = requests.get(f"{url}/courses", params=params)
+        response = requests.get(f"{api_url}/courses", params=params)
         message = "Something went wrong!"
         recent_courses = []
         if response.ok:
@@ -101,7 +100,38 @@ class ActionShowCourses(Action):
         return []
 
 
-class GetAccess(Action):
+class ActionRegister(Action):
+
+    async def run(self, dispatcher, tracker: Tracker, domain) -> List[
+        Dict[Text, Any]]:
+        username = tracker.get_slot("username")
+        email = tracker.get_slot("email")
+        password = tracker.get_slot("password")
+
+        if email is None or password is None:
+            return [FollowupAction("utter_not_enough_info")]
+        results = requests.post(f"{api_url}/register",
+                                data={"username": username, 'email': email, 'password': password,
+                                      "password_confirmation": password})
+        if not results.ok:
+            # Do not return as follow-up action or will contradict the rule
+            dispatcher.utter_message(response="utter_register_failed")
+            return []
+
+        json_res = json.loads(results.content)
+        name = json_res["data"]["name"]
+        # personal access token for later request
+        access_token = json_res["data"]["token"]
+        
+        template = "utter_register_succeed"
+        dispatcher.utter_message(response=template)
+        return [SlotSet("access_token", access_token), SlotSet("name", name)]
+
+    def name(self):
+        return 'action_register'
+
+
+class ActionAccessAndPerform(Action):
 
     async def run(self, dispatcher, tracker: Tracker, domain) -> List[
         Dict[Text, Any]]:
@@ -143,7 +173,7 @@ class GetAccess(Action):
         return [SlotSet("access_token", access_token), SlotSet("name", name)]
 
     def name(self):
-        return 'action_get_access'
+        return 'action_access_and_perform'
 
 
 class EnrollCourse(Action):
@@ -165,11 +195,6 @@ class EnrollCourse(Action):
 
     @staticmethod
     def enroll(dispatcher, tracker: Tracker, access_token=None):
-        # Not login yet, save pending action and login to continue
-        access_token = access_token or tracker.get_slot("access_token")
-        if access_token is None:
-            return [SlotSet("pending_action", EnrollCourse._name()), FollowupAction('login_form')]
-
         # Get the course name user have chosen
         course_name = tracker.get_slot("likely_course") or tracker.get_slot("course_name")
         if course_name is None:
@@ -177,6 +202,21 @@ class EnrollCourse(Action):
             if recent_courses is None or len(recent_courses) == 0:
                 return [FollowupAction("utter_enroll_failed")]
             course_name = recent_courses[0]
+        # Check if is valid course
+        data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
+            "data"]
+        print(data)
+        if data["course"] is None:
+            if data["extras"] is not None and len(data["extras"]) > 0:
+                likely_course = data["extras"][0]
+                return [SlotSet("likely_course", likely_course), FollowupAction("utter_course_not_found")]
+
+            return [FollowupAction("utter_course_not_found")]
+
+        # Not login yet, save pending action and login to continue
+        access_token = access_token or tracker.get_slot("access_token")
+        if access_token is None:
+            return [SlotSet("pending_action", EnrollCourse._name()), FollowupAction('login_form')]
 
         # Enroll course
         results = EnrollCourse._enroll(course_name, access_token)
@@ -194,7 +234,7 @@ class EnrollCourse(Action):
 
         template = "utter_enroll_succeed"
         dispatcher.utter_message(response=template)
-        return []
+        return [FollowupAction("action_listen")]
 
     @staticmethod
     def _enroll(course_name, access_token):

@@ -228,6 +228,24 @@ nlu:
       Provide some [Python](course_keyword) courses
   - text: |
       Please provide some [Python](course_keyword) courses
+  - text: |
+      Can you list some courses please
+  - text: |
+      Please give me some [Web](course_keyword) course please
+  - text: |
+      Please give me some [Web](course_keyword) course
+  - text: |
+      Please give some [Web](course_keyword) courses for me
+  - text: |
+      Please provide some course for me
+  - text: |
+      Please provide some course
+  - text: |
+      What about [PHP](course_keyword)?
+  - text: |
+      Can you provide some courses?
+  - text: |
+      How about [PHP](course_keyword) course?
 - intent: my_name_is
   examples: |
     - [Shariq Ayaz](name)
@@ -280,9 +298,9 @@ nlu:
     - I will choose the [Java Spring Boot](course_name)
     - I want to enroll the [Python Tutorial for Newbie](course_name) for Beginners course
     - I want to enroll [PHP for Beginner](course_name) course
-    - I  want to buy [Web Development with Java Sprint Boot](course_name)
+    - I want to buy [Web Development with Java Sprint Boot](course_name)
     - I want to enroll the [Python Tutorial for Beginners](course_name) course
-    - I  want to buy [Java Sprint  Boot](course_name)
+    - I want to buy [Java Sprint Boot](course_name)
     - I want to enroll [Python Tutorial for Beginners](course_name)
     - I want to enroll [Python Tutorial for Beginners](course_name). Can you help me do that?
     - OK. I want to enroll the [Python Tutorial for Beginners](course_name) course
@@ -291,7 +309,13 @@ nlu:
     - I want to enroll the [Django course](course_name)
     - I want to enroll the [Python](course_keyword) course
     - I want to enroll [Python](course_name) Django course
-    - I want to enroll the [Python Tutorial](course_name) course
+    - I want to enroll [Python Tutorial](course_name) course
+    - I want to enroll [Python Tutorial for Beginners](course_name) course. Can you do it for me?
+    - Please enroll the course for me
+    - Please enroll the [Learn Java Programming](course_name) course for me
+    - I want to enroll [Learn Java Programming](course_name) course
+    - I want to enroll [Learn Java Programming](course_name)
+    - So enroll the course for me please
 - intent: thankyou
   examples: |
     - Thank you so much.
@@ -305,6 +329,30 @@ nlu:
     - Thank you very much!
     - Ok tks!
     - Thank
+    - Thanks
+    - Thank you
+    - Thks
+    - Thanks so much
+    - Thank buddy
+- intent: username
+  examples: |
+    - [rosie](username)
+    - [guys](username)
+    - [lisa](username)
+    - [jennie](username)
+    - [James](username)
+    - [Michael](username)
+    - [Snow](username)
+    - Here is my user name: [William](username)
+    - This is my user name: [Joseph](username)
+    - [Donald](username)
+    - [Andrew](username)
+    - [George](username)
+    - [Edward](username)
+    - [Jeffrey](username)
+    - [Rose](username)
+    - [Lisa](username)
+    - [Jenie](username)
 - intent: email
   examples: |
     - [bkjbfk@gmail.com](email)
@@ -319,7 +367,9 @@ nlu:
     - [lisa@gmail.com](email)
     - [jennie@gmail.com](email)
     - [jisoo@gmail.com](email)
-    - [guys@gmail.com](email)
+    - [rose@gmail.com](email)
+    - [rose12@gmail.com](email)
+    - [jenie@gmail.com](email)
 - intent: password
   examples: |
     - [1234](password)
@@ -331,11 +381,48 @@ nlu:
     - [Brijesh123](password)
     - Here is my password: [brij133bB](password)
     - This is my password: [1324234gsdD4324](password)
-    - IloveyouLisa
-    - Iloveyou
+    - [IloveyouLisa](password)
+    - [Iloveyou](password)
     - [123456](password)
     - [abc123](password)
     - [password123](password)
+- intent: register
+  examples: |
+    - Please create an account for me
+    - Can you help me create an account
+    - Please register an account for me
+    - I want to create an account
+    - I want to register an account. Can you help me do that?
+    - So help me create an account please
+    - OK. Let create an account for me
+- intent: login
+  examples: |
+    - Please login into my account
+    - I want to login
+    - I want to login into my account
+    - How can I login
+    - Login into my account please
+    - Can you help me login into my account
+    - Login please
+    - Help me login
+    - Can you help me login?
+- intent: ask_how_to_take_course
+  examples: |
+    - How can I enroll the [PHP tutorial for beginners](course_name) course?
+    - How can I buy the this course?
+    - How can I take the [Java Development with Spring Boot](course_name) course?
+    - How can I learn this course?
+    - What can I do to enroll the [Django for Beginners](course_name) course?
+    - How can I take the [PHP tutorial for beginners](course_name) course?
+    - How can I buy [Web Development with Java Sprint Boot](course_name)
+    - What I need to do to take this course?
+    - What I need to do so I can learn the [Python Tutorial for Beginners](course_name) course?
+    - How can I take the course on your website?
+    - How can I buy the [Web development with Java Sprint Boot](course_name) course?
+    - How can I learn the [Learn C++ Programming](course_name) course?
+- intent: nlu_fallback
+  examples: |
+    - [Jisoo](username)
 - regex: email
   examples: |
     - [_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})

@@ -17,6 +17,11 @@ rules:
   - intent: about_us
   - action: utter_about_us
 
+- rule: Say instruction take course anytime user ask how can I take this course
+  steps:
+  - intent: ask_how_to_take_course
+  - action: utter_instruction_take_course
+
 - rule: Submit login form
   condition:
   # Condition that form is active.
@@ -28,4 +33,18 @@ rules:
   - slot_was_set:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
-  - action: action_get_access
+  - action: action_access_and_perform
+
+
+- rule: Submit register form
+  condition:
+  # Condition that form is active.
+  - active_loop: register_form
+  steps:
+  # Form is deactivated
+  - action: register_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_register
