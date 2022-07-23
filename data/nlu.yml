@@ -248,6 +248,8 @@ nlu:
       How about [PHP](course_keyword) course?
   - text: |
       Please provide some courses
+  - text: |
+      Please give me some [Java](course_keyword) course
 - intent: my_name_is
   examples: |
     - [Shariq Ayaz](name)
@@ -333,6 +335,7 @@ nlu:
     - I want to enroll [Learn Java Programming](course_name) course
     - I want to enroll [Learn Java Programming](course_name)
     - So enroll the course for me please
+    - I want to enroll [Learn Java Programming](course_name) | [Video Tutorial for Beginners](course_name) course
 - intent: thankyou
   examples: |
     - Thank you so much.

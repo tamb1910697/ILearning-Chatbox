@@ -763,3 +763,53 @@ stories:
       - action: action_detail_course
       - intent: thankyou
       - action: utter_you_are_welcome
+
+  - story: interactive_story_enroll_paid_course
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Learn Java Programming | Video Tutorial for Beginners
+              - Python Tutorial for Beginners
+              - Web development with Java Sprint Boot
+      - intent: enroll_course
+        entities:
+          - course_name: Python Tutorial for Beginners
+      - slot_was_set:
+          - course_name: Python Tutorial for Beginners
+      - action: action_enroll_course
+      - action: utter_ask_buy_course
+      - intent: affirm
+      - action: action_buy_course
+      - intent: thankyou
+      - action: utter_you_are_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: interactive_story_enroll_paid_course_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+        entities:
+          - course_keyword: Java
+      - slot_was_set:
+          - course_keyword:
+              - Java
+      - action: action_check_courses
+      - slot_was_set:
+          - recent_courses:
+              - Learn Java Programming | Video Tutorial for Beginners
+              - Web development with Java Sprint Boot
+      - intent: enroll_course
+        entities:
+          - course_name: Learn Java Programming | Video Tutorial for Beginners
+      - slot_was_set:
+          - course_name: Learn Java Programming | Video Tutorial for Beginners
+      - action: action_enroll_course
+      - action: utter_ask_buy_course
+      - intent: affirm
+      - action: action_buy_course

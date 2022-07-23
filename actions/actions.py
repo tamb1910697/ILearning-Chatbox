@@ -191,12 +191,16 @@ class EnrollCourse(Action):
         # Check if is valid course
         data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
             "data"]
+        print(data)
         if data["course"] is None:
             if data["extras"] is not None and len(data["extras"]) > 0:
                 likely_course = data["extras"][0]["name"]
                 return [SlotSet("likely_course", likely_course), FollowupAction("utter_course_not_found_and_suggest")]
 
             return [FollowupAction("utter_course_not_found")]
+
+        if data["course"]["price"] is not None and data["course"]["price"] > 0:
+            return [FollowupAction("utter_ask_buy_course")]
 
         # Not login yet, save pending action and login to continue
         access_token = access_token or tracker.get_slot("access_token")
@@ -266,3 +270,33 @@ class ActionDetailCourse(Action):
 
     def name(self):
         return "action_detail_course"
+
+
+class ActionBuyCourse(Action):
+    def name(self) -> Text:
+        return 'action_buy_course'
+
+    async def run(self, dispatcher, tracker: Tracker, domain):
+        # Get the course name user have chosen
+        course_name = tracker.get_slot("likely_course") or tracker.get_slot("course_name")
+        if course_name is None:
+            recent_courses = tracker.get_slot('recent_courses')
+            if recent_courses is None or len(recent_courses) == 0:
+                return [FollowupAction("utter_enroll_failed")]
+            course_name = recent_courses[0]
+        # Check if is valid course
+        data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
+            "data"]
+        if data["course"] is None:
+            if data["extras"] is not None and len(data["extras"]) > 0:
+                likely_course = data["extras"][0]["name"]
+                return [SlotSet("likely_course", likely_course), FollowupAction("utter_course_not_found_and_suggest")]
+
+            return [FollowupAction("utter_course_not_found")]
+
+        req = PreparedRequest()
+        req.prepare_url(f"{base_url}/courses/checkout/{data['course']['id']}", {})
+        json_message = {"text": "Please fill the require field and pay to enroll the course", "redirect": {"url": req.url}}
+
+        dispatcher.utter_message(json_message=json_message)
+        return []

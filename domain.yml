@@ -27,9 +27,9 @@ intents:
 - username
 entities:
 - course_name
+- course_keyword
 - username
 - password
-- course_keyword
 - email
 - name
 slots:
@@ -183,13 +183,19 @@ responses:
   utter_not_enough_info:
   - text: Please fill all require field
   - text: Please check your input again to fill out all require field
+  utter_ask_buy_course:
+  - text: This is a paid course, to enroll the course you need to buy it. Do you want to continue?
+  - text: This is a premium course, you need to buy the course to enroll. Do you want to go to the checkout page and buy the course?
+  - text: You need to buy the course to enroll. Do you want to go to the checkout page and buy it?
 actions:
 - action_access_and_perform
+- action_buy_course
 - action_check_courses
 - action_detail_course
 - action_enroll_course
 - action_register
 - action_show_courses
+- utter_ask_buy_course
 - utter_course_not_found_and_suggest
 - utter_goodbye
 - utter_greet
