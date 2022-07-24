@@ -88,7 +88,6 @@ stories:
       - action: utter_you_are_welcome
       - intent: goodbye
       - action: utter_goodbye
-
   - story: interactive_story_enroll_course_not_found
     steps:
       - intent: enroll_course
@@ -128,7 +127,6 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-
   - story: interactive_enroll_course_not_found_story_1
     steps:
       - intent: enroll_course
@@ -170,7 +168,6 @@ stories:
           - pending_action: null
       - intent: thankyou
       - action: utter_you_are_welcome
-
   - story: interactive_story_enroll_course_found_1
     steps:
       - intent: greet
@@ -218,7 +215,6 @@ stories:
       - action: utter_you_are_welcome
       - intent: goodbye
       - action: utter_goodbye
-
   - story: story register short
     steps:
       - intent: register
@@ -250,7 +246,6 @@ stories:
           - access_token: 39|hDS3QKqEClRLTV4blyfIw5SoeE4Dur9jEk8Yax3t
       - slot_was_set:
           - name: Rosie
-
   - story: interactive_story_register_in_middle
     steps:
       - intent: greet
@@ -298,7 +293,6 @@ stories:
           - requested_slot: null
       - active_loop: null
       - action: action_register
-
   - story: interactive_story_ask_and_register_1
     steps:
       - intent: greet
@@ -346,7 +340,6 @@ stories:
           - requested_slot: null
       - active_loop: null
       - action: action_register
-
   - story: interactive_story_ask_and_register
     steps:
       - intent: greet
@@ -394,7 +387,6 @@ stories:
           - requested_slot: null
       - active_loop: null
       - action: action_register
-
   - story: interactive_story_ask_enroll_course
     steps:
       - intent: greet
@@ -405,7 +397,6 @@ stories:
       - action: utter_you_are_welcome
       - intent: goodbye
       - action: utter_goodbye
-
   - story: ask_login
     steps:
       - intent: greet
@@ -419,7 +410,6 @@ stories:
           - email: guys@gmail.com
       - slot_was_set:
           - email: guys@gmail.com
-
   - story: ask_login_2
     steps:
       - intent: login
@@ -431,7 +421,6 @@ stories:
           - email: guys@gmail.com
       - slot_was_set:
           - email: guys@gmail.com
-
   - story: interactive_story_1
     steps:
       - intent: greet
@@ -482,7 +471,6 @@ stories:
       - action: action_enroll_course
       - intent: thankyou
       - action: utter_you_are_welcome
-
   - story: interactive_story_2
     steps:
       - intent: greet
@@ -493,7 +481,6 @@ stories:
       - slot_was_set:
           - course_name: Learn C++ Programming
       - action: utter_instruction_take_course
-
   - story: interactive_story_1
     steps:
       - intent: login
@@ -533,7 +520,6 @@ stories:
       - slot_was_set:
           - course_name: for
       - action: action_enroll_course
-
   - story: interactive_story_login_enroll_not_found_course
     steps:
       - intent: greet
@@ -581,7 +567,6 @@ stories:
       - action: action_enroll_course
       - intent: thankyou
       - action: utter_you_are_welcome
-
   - story: interactive_story_1
     steps:
       - intent: greet
@@ -638,7 +623,6 @@ stories:
       - action: action_enroll_course
       - intent: thankyou
       - action: utter_you_are_welcome
-
   - story: Go to detail course short
     steps:
       - intent: detail_course
@@ -647,7 +631,6 @@ stories:
       - slot_was_set:
           - course_name: PHP Web Development Tutorial
       - action: action_detail_course
-
   - story: Go to detail course long
     steps:
       - intent: greet
@@ -659,7 +642,6 @@ stories:
               - Web development with Java Sprint Boot
       - intent: detail_course
       - action: action_detail_course
-
   - story: interactive_story_1
     steps:
       - intent: greet
@@ -679,7 +661,6 @@ stories:
       - action: action_detail_course
       - intent: thankyou
       - action: utter_you_are_welcome
-
   - story: interactive_story_1
     steps:
       - intent: greet
@@ -702,7 +683,6 @@ stories:
       - action: utter_course_not_found_and_suggest
       - intent: affirm
       - action: action_detail_course
-
   - story: interactive_story_2
     steps:
       - intent: greet
@@ -713,7 +693,6 @@ stories:
       - slot_was_set:
           - course_name: Java Tutorial
       - action: action_detail_course
-
   - story: interactive_story_3
     steps:
       - intent: greet
@@ -729,7 +708,6 @@ stories:
       - action: utter_course_not_found_and_suggest
       - intent: affirm
       - action: action_detail_course
-
   - story: interactive_story_4
     steps:
       - intent: greet
@@ -745,7 +723,6 @@ stories:
       - action: utter_course_not_found_and_suggest
       - intent: affirm
       - action: action_detail_course
-
   - story: interactive_story_1
     steps:
       - intent: greet
@@ -763,7 +740,6 @@ stories:
       - action: action_detail_course
       - intent: thankyou
       - action: utter_you_are_welcome
-
   - story: interactive_story_enroll_paid_course
     steps:
       - intent: greet
@@ -788,7 +764,6 @@ stories:
       - action: utter_you_are_welcome
       - intent: goodbye
       - action: utter_goodbye
-
   - story: interactive_story_enroll_paid_course_2
     steps:
       - intent: greet
@@ -813,3 +788,119 @@ stories:
       - action: utter_ask_buy_course
       - intent: affirm
       - action: action_buy_course
+  - story: interactive_story_show_my_courses_short
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_my_courses
+      - action: action_show_my_courses
+  - story: interactive_story_show_my_courses_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_my_courses
+      - action: action_show_my_courses
+      - slot_was_set:
+          - pending_action: action_show_my_courses
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+  - story: interactive_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_my_courses
+      - action: action_show_my_courses
+      - slot_was_set:
+          - pending_action: action_show_my_courses
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 47|iJLLKQr2Y2ixTirMqipRpIWBg6VcJDUdqARmlsYC
+      - slot_was_set:
+          - name: Jenie
+
+  - story: Story from Conversation ID 2998f6c2a8d9448e91da30db78e0f240
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_my_courses
+      - action: action_show_my_courses
+      - slot_was_set:
+          - pending_action: action_show_my_courses
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 48|j3Ee5vd2A15Bi6V1kJpwINgRYTBKict8xS7hRgh0
+      - slot_was_set:
+          - name: Jenie
+      - action: action_show_my_courses
+      - slot_was_set:
+          - recent_courses: [ ]
+      - intent: show_my_courses
+      - action: action_show_my_courses
+      - slot_was_set:
+          - recent_courses:
+              - PHP tutorial for beginners
+      - intent: show_my_courses
+      - action: action_show_my_courses
+      - intent: show_my_courses
+      - action: action_show_my_courses
+      - slot_was_set:
+          - recent_courses:
+              - PHP tutorial for beginners

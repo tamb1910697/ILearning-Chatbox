@@ -23,14 +23,15 @@ intents:
 - password
 - register
 - show_courses
+- show_my_courses
 - thankyou
 - username
 entities:
+- password
+- email
 - course_name
 - course_keyword
 - username
-- password
-- email
 - name
 slots:
   pending_action:
@@ -195,6 +196,7 @@ actions:
 - action_enroll_course
 - action_register
 - action_show_courses
+- action_show_my_courses
 - utter_ask_buy_course
 - utter_course_not_found_and_suggest
 - utter_goodbye

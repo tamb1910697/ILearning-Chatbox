@@ -150,7 +150,12 @@ class ActionAccessAndPerform(Action):
                 return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None),
                         *res]
 
-            return [SlotSet("access_token", access_token), SlotSet("name", name), FollowupAction(pending_action)]
+            if pending_action == ActionShowMyCourses.get_name():
+                res = ActionShowMyCourses.perform(dispatcher, tracker, domain, access_token)
+                return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None),
+                        *res]
+
+            return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None)]
 
         template = "utter_access"
         if access_token is not None:
@@ -296,7 +301,72 @@ class ActionBuyCourse(Action):
 
         req = PreparedRequest()
         req.prepare_url(f"{base_url}/courses/checkout/{data['course']['id']}", {})
-        json_message = {"text": "Please fill the require field and pay to enroll the course", "redirect": {"url": req.url}}
+        json_message = {"text": "Please fill the require field and pay to enroll the course",
+                        "redirect": {"url": req.url}}
 
         dispatcher.utter_message(json_message=json_message)
         return []
+
+
+class ActionShowMyCourses(Action):
+
+    def name(self) -> Text:
+        return self._name()
+
+    @staticmethod
+    def _name():
+        return 'action_show_my_courses'
+
+    @staticmethod
+    def get_name():
+        return ActionShowMyCourses._name()
+
+    async def run(
+            self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        return self.perform(dispatcher, tracker, domain)
+
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def perform(dispatcher, tracker, domain=None, access_token=None):
+        # Not login yet, save pending action and login to continue
+        access_token = access_token or tracker.get_slot("access_token")
+        if access_token is None:
+            return [SlotSet("pending_action", ActionShowMyCourses._name()), FollowupAction('login_form')]
+
+        keywords = []
+        # Search with category
+        for entity in tracker.latest_message["entities"]:
+            if entity["entity"] == "course_keyword":
+                keywords.append(entity["value"])
+
+        # Params for query
+        params = {}
+        if keywords is not None:
+            params["keywords[]"] = keywords
+
+        headers = {'Accept': 'application/json',
+                   'Authorization': f'Bearer {access_token}'}
+        response = requests.get(f"{api_url}/courses/my-courses", headers=headers)
+        message = "Something went wrong!"
+        recent_courses = []
+        if response.ok:
+            data = json.loads(response.content)
+            if len(data["data"]) == 0:
+                if keywords is not None:
+                    message = "Sorry you have not enroll any course of %s" % ', '.join(keywords)
+                else:
+                    message = "Sorry you have not enroll any course yet"
+            else:
+                c = ', '.join(keywords) + " " if keywords is not None else ""
+                message = f"Here are some of your {c}courses: "
+                recent_courses = list(map(lambda x: x["name"], data["data"][:3]))
+                message += ', '.join(list(map(lambda x: x["name"], data["data"][:3])))
+
+        req = PreparedRequest()
+        req.prepare_url(f"{base_url}/student/courses", params)
+
+        json_message = {"text": message, "link": {"url": req.url, "title": "Show more"}}
+        dispatcher.utter_message(json_message=json_message)
+
+        return [SlotSet("recent_courses", recent_courses)]

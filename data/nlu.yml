@@ -40,6 +40,7 @@ nlu:
     - Hello
     - Good afternoon!
     - Good afternoon
+    - Long time no see
 - intent: goodbye
   examples: |
     - good afternoon
@@ -250,6 +251,16 @@ nlu:
       Please provide some courses
   - text: |
       Please give me some [Java](course_keyword) course
+  - text: |
+      Can you show me some [Java](course_keyword) course?
+  - text: |
+      How about [Python](course_keyword) course?
+  - text: |
+      Good! I want you to provide me some courses
+  - text: |
+      What about [PHP](course_keyword) course?
+  - text: |
+      Good! I want you to give me some [AI](course_keyword) course
 - intent: my_name_is
   examples: |
     - [Shariq Ayaz](name)
@@ -292,6 +303,17 @@ nlu:
     - Can you show more please?
     - Please show me
     - Show me courses
+- intent: show_my_courses
+  examples: |
+    - Please show me all of my courses
+    - Can you show me all the courses I have enrolled?
+    - Please show my courses
+    - Please show all my enrolled courses
+    - What courses I have enrolled?
+    - List all courses I have enrolled
+    - Show me all courses I have bought
+    - Show me all courses I have enrolled
+    - Please show me my courses
 - intent: detail_course
   examples: |
     - Please show me the detail of this course
@@ -307,6 +329,8 @@ nlu:
     - Please show me the detail of the [Java Tutorial](course_name) course
     - Please show more about the [Django](course_name) course
     - Please go to the detail page of the [Django](course_name) course
+    - Please show the detail of the [Python Django](course_name) course
+    - Can you show the detail of the [Python Tutorial for Beginners](course_name)
 - intent: enroll_course
   examples: |
     - Please take this course for me
@@ -336,6 +360,7 @@ nlu:
     - I want to enroll [Learn Java Programming](course_name)
     - So enroll the course for me please
     - I want to enroll [Learn Java Programming](course_name) | [Video Tutorial for Beginners](course_name) course
+    - I want to enroll the first course
 - intent: thankyou
   examples: |
     - Thank you so much.
