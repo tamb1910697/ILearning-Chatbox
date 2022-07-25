@@ -24,6 +24,7 @@ intents:
 - register
 - show_courses
 - show_my_courses
+- show_progress_course
 - thankyou
 - username
 entities:
@@ -197,6 +198,7 @@ actions:
 - action_register
 - action_show_courses
 - action_show_my_courses
+- action_show_progress_course
 - utter_ask_buy_course
 - utter_course_not_found_and_suggest
 - utter_goodbye

@@ -850,7 +850,6 @@ stories:
           - access_token: 47|iJLLKQr2Y2ixTirMqipRpIWBg6VcJDUdqARmlsYC
       - slot_was_set:
           - name: Jenie
-
   - story: Story from Conversation ID 2998f6c2a8d9448e91da30db78e0f240
     steps:
       - intent: greet
@@ -889,6 +888,7 @@ stories:
           - access_token: 48|j3Ee5vd2A15Bi6V1kJpwINgRYTBKict8xS7hRgh0
       - slot_was_set:
           - name: Jenie
+      - intent: show_my_courses
       - action: action_show_my_courses
       - slot_was_set:
           - recent_courses: [ ]
@@ -904,3 +904,67 @@ stories:
       - slot_was_set:
           - recent_courses:
               - PHP tutorial for beginners
+  - story: show_progress_course_short
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: courses
+      - action: action_check_courses
+      - intent: show_progress_course
+      - action: action_show_progress_course
+  - story: Story from Conversation ID 7253db0eb4374cd2842c2a917c70f740
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: detail_course
+        entities:
+          - course_name: Python Django
+      - slot_was_set:
+          - course_name: Python Django
+      - action: action_detail_course
+      - intent: show_my_courses
+      - action: action_show_my_courses
+      - slot_was_set:
+          - pending_action: action_show_my_courses
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - intent: email
+        entities:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - action: login_form
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - intent: password
+        entities:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - action: login_form
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 50|1etv4WU4LtyUxpQoKrkdsGMtNPzJKQiMk4bhcNyp
+      - slot_was_set:
+          - name: Jenie
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - recent_courses:
+              - PHP tutorial for beginners
+              - Python Django
+      - intent: show_progress_course
+        entities:
+          - course_name: Python Django
+      - slot_was_set:
+          - course_name: Python Django
+      - action: action_show_progress_course

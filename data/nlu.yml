@@ -331,6 +331,21 @@ nlu:
     - Please go to the detail page of the [Django](course_name) course
     - Please show the detail of the [Python Django](course_name) course
     - Can you show the detail of the [Python Tutorial for Beginners](course_name)
+
+- intent: show_progress_course
+  examples: |
+    - Please show me the progress of this course
+    - Please show the progress of the [PHP Tutorial](course_name) course
+    - I want to know the progress of this course
+    - I want to check the progress of the [Python Tutorial](course_name) course
+    - Please show me what I have done of this course
+    - Please show more about the [Java Tutorial](course_name)
+    - Please show me the progress of the [Python Tutorial for Beginners](course_name) course
+    - Please show me the progress of the [Python Tutorial](course_name) course
+    - Please show me the progress of the [Java Tutorial](course_name) course
+    - Please show the progress of the [Python Django](course_name) course
+    - Can you show the progress of the [Python Tutorial for Beginners](course_name)
+
 - intent: enroll_course
   examples: |
     - Please take this course for me

@@ -155,6 +155,10 @@ class ActionAccessAndPerform(Action):
                 return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None),
                         *res]
 
+            if pending_action == ActionShowProgressCourse.get_name():
+                ActionShowProgressCourse.perform(dispatcher, tracker, domain, access_token)
+                return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None), ]
+
             return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None)]
 
         template = "utter_access"
@@ -196,7 +200,6 @@ class EnrollCourse(Action):
         # Check if is valid course
         data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
             "data"]
-        print(data)
         if data["course"] is None:
             if data["extras"] is not None and len(data["extras"]) > 0:
                 likely_course = data["extras"][0]["name"]
@@ -370,3 +373,86 @@ class ActionShowMyCourses(Action):
         dispatcher.utter_message(json_message=json_message)
 
         return [SlotSet("recent_courses", recent_courses)]
+
+
+class ActionShowProgressCourse(Action):
+
+    def name(self) -> Text:
+        return self._name()
+
+    @staticmethod
+    def _name():
+        return 'action_show_progress_course'
+
+    @staticmethod
+    def get_name():
+        return ActionShowProgressCourse._name()
+
+    async def run(
+            self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        return self.perform(dispatcher, tracker, domain)
+
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def perform(dispatcher, tracker, domain=None, access_token=None):
+        # Not login yet, save pending action and login to continue
+        access_token = access_token or tracker.get_slot("access_token")
+        if access_token is None:
+            return [SlotSet("pending_action", ActionShowProgressCourse._name()), FollowupAction('login_form')]
+
+        valid, course = check_valid_course(tracker)
+        if not valid:
+            if course is not None:
+                return [SlotSet("likely_course", course['name']),
+                        FollowupAction("utter_course_not_found_and_suggest")]
+            return [FollowupAction("utter_course_not_found")]
+
+        params = {"course_id": course["id"]}
+
+        headers = {'Accept': 'application/json',
+                   'Authorization': f'Bearer {access_token}'}
+        response = requests.get(f"{api_url}/courses/progress", params=params, headers=headers)
+        message = "Something went wrong!"
+        recent_courses = []
+        if response.ok:
+            data = json.loads(response.content)["data"]
+            progress = 100.0 * data["complete"] / data["total"]
+            if progress == 0:
+                message = "You have not start learning the course yet"
+            else:
+                message = f"You have complete {round(progress)}% of the course"
+
+        req = PreparedRequest()
+        req.prepare_url(f"{base_url}/student/courses", {})
+
+        json_message = {"text": message, "link": {"url": req.url, "title": "Show more"}}
+        dispatcher.utter_message(json_message=json_message)
+
+        return []
+
+
+def check_valid_course(tracker):
+    """
+    Check if a course name in tracker is valid
+    :param tracker: tracker of conversation
+    :return: bool, course (True and the course if valid and False, the likely course with similar name)
+    """
+    # Get the course name user have chosen
+    course_name = tracker.get_slot("likely_course") or tracker.get_slot("course_name")
+    if course_name is None:
+        recent_courses = tracker.get_slot('recent_courses')
+        if recent_courses is None or len(recent_courses) == 0:
+            return False, None
+        course_name = recent_courses[0]
+    # Check if is valid course
+    data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
+        "data"]
+    if data["course"] is None:
+        if data["extras"] is not None and len(data["extras"]) > 0:
+            likely_course = data["extras"][0]
+            return False, likely_course
+
+        return False, None
+
+    return True, data["course"]
