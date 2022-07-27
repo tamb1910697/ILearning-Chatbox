@@ -24,6 +24,7 @@ intents:
 - register
 - show_courses
 - show_my_courses
+- show_pending_courses
 - show_progress_course
 - thankyou
 - username
@@ -71,6 +72,9 @@ slots:
   name:
     type: text
     influence_conversation: true
+  active_loop:
+    type: unfeaturized
+    influence_conversation: false
 responses:
   utter_greet:
   - text: I'm here!
@@ -198,6 +202,7 @@ actions:
 - action_register
 - action_show_courses
 - action_show_my_courses
+- action_show_pending_courses
 - action_show_progress_course
 - utter_ask_buy_course
 - utter_course_not_found_and_suggest

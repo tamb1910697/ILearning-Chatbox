@@ -331,7 +331,6 @@ nlu:
     - Please go to the detail page of the [Django](course_name) course
     - Please show the detail of the [Python Django](course_name) course
     - Can you show the detail of the [Python Tutorial for Beginners](course_name)
-
 - intent: show_progress_course
   examples: |
     - Please show me the progress of this course
@@ -345,7 +344,18 @@ nlu:
     - Please show me the progress of the [Java Tutorial](course_name) course
     - Please show the progress of the [Python Django](course_name) course
     - Can you show the progress of the [Python Tutorial for Beginners](course_name)
-
+- intent: show_pending_courses
+  examples: |
+    - Please show all the pending courses
+    - Please show all the courses have not been approved yet
+    - Show all courses not been approved
+    - Check all pending courses
+    - View all unapproved courses
+    - Show new courses not approved
+    - List pending courses
+    - View pending courses
+    - Show unapproved courses
+    - Please show pending courses
 - intent: enroll_course
   examples: |
     - Please take this course for me
@@ -431,6 +441,8 @@ nlu:
     - [rose@gmail.com](email)
     - [rose12@gmail.com](email)
     - [jenie@gmail.com](email)
+    - [jenie@gmail.com](email)
+    - [guys@gmail.com](email)
 - intent: password
   examples: |
     - [1234](password)
@@ -446,6 +458,7 @@ nlu:
     - [Iloveyou](password)
     - [123456](password)
     - [abc123](password)
+    - [password123](password)
 - intent: register
   examples: |
     - Please create an account for me

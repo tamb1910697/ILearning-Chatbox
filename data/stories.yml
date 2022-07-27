@@ -968,3 +968,99 @@ stories:
       - slot_was_set:
           - course_name: Python Django
       - action: action_show_progress_course
+
+  - story: show_pending_courses_short
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_pending_courses
+      - action: action_show_pending_courses
+
+  - story: interactive_story_pending_courses_full_short
+    steps:
+      - intent: show_pending_courses
+      - action: action_show_pending_courses
+      - slot_was_set:
+          - pending_action: action_show_pending_courses
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+
+  - story: interactive_story_pending_courses_normal_and_admin_login
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_pending_courses
+      - action: action_show_pending_courses
+      - slot_was_set:
+          - pending_action: action_show_pending_courses
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - email: jenie@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - slot_was_set:
+          - email: null
+      - slot_was_set:
+          - password: null
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 74|uL67sK58COkWqdxdEDsi5PNU6NkanJemtIEzDVPU
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - recent_courses:
+              - Python Django
+              - Python Tutorial for Beginners
+              - API Testing with Python 3 & PyTest, Backend Automation 2022
