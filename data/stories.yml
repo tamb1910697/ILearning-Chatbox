@@ -1064,3 +1064,139 @@ stories:
               - Python Django
               - Python Tutorial for Beginners
               - API Testing with Python 3 & PyTest, Backend Automation 2022
+
+  - story: approve_pending_courses_short
+    steps:
+      - intent: approve_course
+      - action: action_approve_course
+
+  - story: approve_pending_courses_short_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: approve_course
+      - action: action_approve_course
+
+  - story: interactive_story_1
+    steps:
+      - intent: approve_course
+        entities:
+          - course_name: Python Django
+      - slot_was_set:
+          - course_name: Python Django
+      - action: action_approve_course
+      - slot_was_set:
+          - pending_action: action_approve_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 91|faTTzRjRH1elDEoTk6NSPSZAKQY6w5q22vXZoKvr
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  - story: interactive_story_1
+    steps:
+      - intent: approve_course
+        entities:
+          - course_name: Python Django
+      - slot_was_set:
+          - course_name: Python Django
+      - action: action_approve_course
+      - slot_was_set:
+          - pending_action: action_approve_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 91|faTTzRjRH1elDEoTk6NSPSZAKQY6w5q22vXZoKvr
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - intent: approve_course
+        entities:
+          - course_name: Python Django
+      - slot_was_set:
+          - course_name: Python Django
+      - action: action_approve_course
+
+
+  - story: interactive_story_1
+    steps:
+      - intent: enroll_course
+        entities:
+          - course_name: Python Django
+      - slot_was_set:
+          - course_name: Python Django
+      - action: action_enroll_course
+      - slot_was_set:
+          - pending_action: action_enroll_course
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 95|CEglukIgn915MssuRrmUUPxiOJVf8RhrYKF5cXSD
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - intent: approve_course
+        entities:
+          - course_name: API Testing with Python 3 & PyTest, Backend Automation 2022
+      - slot_was_set:
+          - course_name: API Testing with Python 3 & PyTest, Backend Automation 2022
+      - action: action_approve_course
+      - intent: approve_course
+        entities:
+          - course_name: API Testing with Python 3 & PyTest, Backend Automation 2022
+      - slot_was_set:
+          - course_name: API Testing with Python 3 & PyTest, Backend Automation 2022
+      - action: action_approve_course

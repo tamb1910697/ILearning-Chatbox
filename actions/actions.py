@@ -187,6 +187,10 @@ class ActionAccessAndPerform(Action):
             res = ActionShowPendingCourses.perform(dispatcher, tracker, domain, access_token)
             return res
 
+        if pending_action == ActionApproveCourse.get_name():
+            res = ActionApproveCourse.perform(dispatcher, tracker, access_token)
+            return res
+
         return []
 
     @staticmethod
@@ -202,6 +206,9 @@ class ActionAccessAndPerform(Action):
 
         if pending_action == ActionShowPendingCourses.get_name():
             return ActionShowPendingCourses.condition(tracker, access_token)
+
+        if pending_action == ActionApproveCourse.get_name():
+            return ActionApproveCourse.condition(tracker, access_token)
 
         return False, "Invalid action"
 
@@ -482,56 +489,6 @@ class ActionShowProgressCourse(Action):
         return condition, "OK" if condition else "Need to login"
 
 
-# class ActionAdminAccessAndPerform(Action):
-# 
-#     async def run(self, dispatcher, tracker: Tracker, domain) -> List[
-#         Dict[Text, Any]]:
-#         if is_admin(tracker):
-#             access_token = tracker.get_slot("access_token")
-#             pending_action = tracker.get_slot("pending_action")
-#             if pending_action is not None:
-#                 res = self.perform_pending_action(dispatcher, tracker, domain, access_token, pending_action)
-#                 return [SlotSet("pending_action", None), *res]
-# 
-#         user = tracker.get_slot("email")
-#         password = tracker.get_slot("password")
-#         if user is None or password is None:
-#             return [FollowupAction("login_form")]
-#         results = requests.post(f"{api_url}/login",
-#                                 data={'email': user, 'password': password})
-#         if not results.ok:
-#             dispatcher.utter_message("Please enter valid information")
-#             return [ActionReverted(), AllSlotsReset()]
-# 
-#         response = json.loads(results.content)
-#         if not response["success"]:
-#             dispatcher.utter_message("These credentials do not match our records.")
-#             return [ActionReverted(), AllSlotsReset()]
-# 
-#         json_res = json.loads(results.content)
-#         name = json_res["data"]["name"]
-#         # personal access token for later request
-#         access_token = json_res["data"]["token"]
-#         # Not admin account return
-#         if not is_admin(tracker):
-#             dispatcher.utter_message(response="utter_not_admin")
-#             return []
-# 
-#         pending_action = tracker.get_slot("pending_action")
-#         if pending_action is not None:
-#             res = self.perform_pending_action(dispatcher, tracker, domain, access_token, pending_action)
-#             return [SlotSet("access_token", access_token), SlotSet("name", name), SlotSet("pending_action", None), *res]
-# 
-#         template = "utter_access"
-#         if access_token is not None:
-#             template = "utter_already_login"
-#         dispatcher.utter_message(response=template)
-#         return [SlotSet("access_token", access_token), SlotSet("name", name)]
-# 
-#     def name(self):
-#         return 'action_access_and_perform'
-
-
 class ActionShowPendingCourses(Action):
 
     def name(self) -> Text:
@@ -573,7 +530,17 @@ class ActionShowPendingCourses(Action):
             else:
                 url = f"{base_url}/courses/%s"
                 table_data = list(
-                    map(lambda x: [{"data": x["name"], "class": ""}, {"data": "View", "class": "text-center", "link": f"{base_url}/courses/{x['id']}"}], data["data"]))
+                    map(lambda x: [
+                        [{"data": x["name"], "class": ""}],
+                        [
+                            {"data": "View", "class": "text-center", "link": f"{base_url}/courses/{x['id']}"},
+                            {"data": "Approve", "class": "text-center text-green",
+                             "json_payload": json.dumps(
+                                 {"sender": tracker.sender_id,
+                                  "message": f"/approve_course{{\"course_name\": \"{x['name']}\"}}"})}
+                        ]
+                    ],
+                        data["data"]))
                 recent_courses = list(map(lambda x: x["name"], data["data"]))
                 message = f"Here are list of pending courses: "
 
@@ -583,6 +550,80 @@ class ActionShowPendingCourses(Action):
         dispatcher.utter_message(json_message=json_message)
 
         return [SlotSet("recent_courses", recent_courses)]
+
+    @staticmethod
+    def condition(tracker, access_token=None):
+        condition = is_admin(tracker, access_token)
+        return condition, "OK" if condition else "Need to login into admin account"
+
+
+class ActionApproveCourse(Action):
+
+    async def run(self, dispatcher, tracker: Tracker, domain) -> List[
+        Dict[Text, Any]]:
+        return self.perform(dispatcher, tracker)
+
+    def name(self):
+        return self._name()
+
+    @staticmethod
+    def _name():
+        return 'action_approve_course'
+
+    @staticmethod
+    def get_name():
+        return ActionApproveCourse._name()
+
+    @staticmethod
+    def perform(dispatcher, tracker: Tracker, access_token=None):
+        # Get the course name user have chosen
+        course_name = tracker.get_slot("likely_course") or tracker.get_slot("course_name")
+        if course_name is None:
+            recent_courses = tracker.get_slot('recent_courses')
+            if recent_courses is None or len(recent_courses) == 0:
+                return [FollowupAction("utter_enroll_failed")]
+            course_name = recent_courses[0]
+        # Check if is valid course
+        data = json.loads(requests.get(f"{api_url}/similar-courses", params={"course_name": course_name}).content)[
+            "data"]
+        if data["course"] is None:
+            if data["extras"] is not None and len(data["extras"]) > 0:
+                likely_course = data["extras"][0]["name"]
+                return [SlotSet("likely_course", likely_course), FollowupAction("utter_course_not_found_and_suggest")]
+
+            return [FollowupAction("utter_course_not_found")]
+
+        # Not login yet, save pending action and login to continue
+        access_token = access_token or tracker.get_slot("access_token")
+        if access_token is None:
+            return [SlotSet("pending_action", ActionApproveCourse._name()), FollowupAction('login_form')]
+
+        # Enroll course
+        results = ActionApproveCourse._approve(data["course"]["id"], access_token)
+
+        response = json.loads(results.content)
+        # Failed
+        if not results.ok or not response["success"]:
+            dispatcher.utter_message(response="utter_approve_failed")
+            return []
+
+        template = "utter_approve_succeed"
+        dispatcher.utter_message(response=template)
+        return [FollowupAction("action_listen")]
+
+    @staticmethod
+    def _approve(course_id, access_token):
+        # Get the course name user have chosen
+        if course_id is None:
+            return None
+
+        # Enroll course request
+        headers = {'Accept': 'application/json',
+                   'Authorization': f'Bearer {access_token}'}
+        results = requests.put(f"{api_url}/courses/approve",
+                               data={'course_id': course_id},
+                               headers=headers)
+        return results
 
     @staticmethod
     def condition(tracker, access_token=None):

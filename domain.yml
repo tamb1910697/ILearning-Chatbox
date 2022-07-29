@@ -5,6 +5,7 @@ session_config:
 intents:
 - about_us
 - affirm
+- approve_course
 - ask_apply_online
 - ask_how_to_take_course
 - ask_placements
@@ -73,7 +74,7 @@ slots:
     type: text
     influence_conversation: true
   active_loop:
-    type: unfeaturized
+    type: text
     influence_conversation: false
 responses:
   utter_greet:
@@ -170,9 +171,16 @@ responses:
   - text: Register successful
   - text: Your account has been created
   utter_enroll_succeed:
-  - text: Enroll course successful
+  - text: Enroll course {course_name} successful
+  - text: Success enroll course {course_name}
   utter_enroll_failed:
-  - text: Enroll course failed
+  - text: Enroll course {course_name} failed
+  utter_approve_succeed:
+  - text: Approve course {course_name} successful
+  - text: Success approve course {course_name}
+  utter_approve_failed:
+  - text: Approve course {course_name} failed
+  - text: Fail to approve course {course_name}
   utter_course_not_found_and_suggest:
   - text: The course {course_name} not found on our website. Did you mean {likely_course}
   - text: The course you have choose ({course_name}) is not found. Did you mean {likely_course}
@@ -195,6 +203,7 @@ responses:
   - text: You need to buy the course to enroll. Do you want to go to the checkout page and buy it?
 actions:
 - action_access_and_perform
+- action_approve_course
 - action_buy_course
 - action_check_courses
 - action_detail_course

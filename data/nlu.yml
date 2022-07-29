@@ -372,11 +372,11 @@ nlu:
     - I want to enroll [Python Tutorial for Beginners](course_name)
     - I want to enroll [Python Tutorial for Beginners](course_name). Can you help me do that?
     - OK. I want to enroll the [Python Tutorial for Beginners](course_name) course
-    - I want to enroll the [Web development with Java Sprint](course_name)  [Boot](course_name)
+    - I want to enroll the [Web development with Java Sprint Boot](course_name) course
     - I want to enroll the [Python Tutorial](course_name) course
     - I want to enroll the [Django course](course_name)
     - I want to enroll the [Python](course_keyword) course
-    - I want to enroll [Python](course_name) Django course
+    - I want to enroll [Python Django](course_name) course
     - I want to enroll [Python Tutorial](course_name) course
     - I want to enroll [Python Tutorial for Beginners](course_name) course. Can you do it for me?
     - Please enroll the course for me
@@ -384,8 +384,38 @@ nlu:
     - I want to enroll [Learn Java Programming](course_name) course
     - I want to enroll [Learn Java Programming](course_name)
     - So enroll the course for me please
-    - I want to enroll [Learn Java Programming](course_name) | [Video Tutorial for Beginners](course_name) course
+    - I want to enroll [Learn Java Programming | Video Tutorial for Beginners](course_name) course
     - I want to enroll the first course
+    - I want to enroll [Python Django](course_name) course
+- intent: approve_course
+  examples: |
+    - Please approve this course for me
+    - I want to approve this course
+    - I want to approve the [Python Tutorial](course_name) course
+    - I want to approve the [Java Tutorial for Beginner](course_name) course
+    - Please approve the [PHP Web Development](course_name) for me
+    - I will approve the [Java Spring Boot](course_name)
+    - I want to approve the [Python Tutorial for Newbie](course_name) course
+    - I want to approve [PHP for Beginner](course_name) course
+    - I want to approve [Web Development with Java Sprint Boot](course_name)
+    - I want to approve the [Python Tutorial for Beginners](course_name) course
+    - I want to approve [Java Sprint Boot](course_name)
+    - I want to approve [Python Tutorial for Beginners](course_name)
+    - I want to approve [Python Tutorial for Beginners](course_name). Can you help me do that?
+    - OK. I want to approve the [Python Tutorial for Beginners](course_name) course
+    - I want to approve the [Web development with Java Sprint](course_name)  [Boot](course_name)
+    - I want to approve the [Django course](course_name)
+    - I want to approve the [Python](course_keyword) course
+    - I want to approve [Python Django](course_name) course
+    - I want to approve [Python Tutorial](course_name) course
+    - I want to approve [Python Tutorial for Beginners](course_name) course. Can you do it for me?
+    - Please approve the course for me
+    - Please approve the [Learn Java Programming](course_name) course for me
+    - I want to approve [Learn Java Programming](course_name) course
+    - I want to approve [Learn Java Programming](course_name)
+    - So approve the course for me please
+    - I want to approve [Learn Java Programming](course_name) | [Video Tutorial for Beginners](course_name) course
+    - I want to approve the first course
 - intent: thankyou
   examples: |
     - Thank you so much.
@@ -440,7 +470,6 @@ nlu:
     - [jisoo@gmail.com](email)
     - [rose@gmail.com](email)
     - [rose12@gmail.com](email)
-    - [jenie@gmail.com](email)
     - [jenie@gmail.com](email)
     - [guys@gmail.com](email)
 - intent: password
