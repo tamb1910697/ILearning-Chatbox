@@ -4,15 +4,19 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - about_us
+- add_category
 - affirm
 - approve_course
 - ask_apply_online
 - ask_how_to_take_course
 - ask_placements
 - bot_challenge
+- category_name
 - courses
+- delete_category
 - deny
 - detail_course
+- edit_category
 - email
 - enroll_course
 - goodbye
@@ -21,8 +25,10 @@ intents:
 - mood_great
 - mood_unhappy
 - my_name_is
+- nlu_fallback
 - password
 - register
+- show_categories
 - show_courses
 - show_my_courses
 - show_pending_courses
@@ -30,8 +36,9 @@ intents:
 - thankyou
 - username
 entities:
-- password
+- category_name
 - email
+- password
 - course_name
 - course_keyword
 - username
@@ -58,6 +65,9 @@ slots:
   recent_courses:
     type: list
     influence_conversation: false
+  recent_resources:
+    type: list
+    influence_conversation: false
   access_token:
     type: text
     influence_conversation: true
@@ -71,6 +81,18 @@ slots:
     type: text
     influence_conversation: true
   name:
+    type: text
+    influence_conversation: true
+  category_name:
+    type: text
+    influence_conversation: true
+  new_category_name:
+    type: text
+    influence_conversation: true
+  likely_resource:
+    type: text
+    influence_conversation: true
+  resource_not_found:
     type: text
     influence_conversation: true
   active_loop:
@@ -151,6 +173,14 @@ responses:
   - text: ILearning is website of multi national online course including thousands of high quality of professors has public courses in various topics that can satisfy the demands of the hardest customer. If you interested in learning new things, I can help you to do that. Just say what you want to learn and I will find suitable course for you.
   utter_first_access:
   - text: Please first login to our service to use it.
+  utter_ask_category_name:
+  - text: 'Please tell me category name:'
+  - text: 'Please tell me the name for the category:'
+  - text: 'Please tell me name of the category:'
+  utter_ask_new_category_name:
+  - text: 'Please tell me new name:'
+  - text: 'Please tell me the new name for the category:'
+  - text: 'Please tell me new name of the category:'
   utter_ask_email:
   - text: 'Please tell me your email:'
   - text: 'Please tell me your email address:'
@@ -189,6 +219,14 @@ responses:
   - text: The course {course_name} not found on our website.
   - text: The course you have choose ({course_name}) is not found.
   - text: The course {course_name} does not exist on our website.
+  utter_resource_not_found:
+  - text: The resource {resource_not_found} not found on our website.
+  - text: The resource you have choose ({resource_not_found}) is not found.
+  - text: The resource {resource_not_found} does not exist on our website.
+  utter_resource_not_found_and_suggest:
+  - text: The resource {resource_not_found} not found on our website. Did you mean {likely_resource}
+  - text: The resource you have choose ({resource_not_found}) is not found. Did you mean {likely_resource}
+  - text: The resource {resource_not_found} does not exist on our website. Did you mean {likely_resource}
   utter_instruction_take_course:
   - text: You can take this course by enroll the course. You may need to login to enroll the course. If you do not have any account, you can register an account.
   - text: To take this course you need to login into your account (if you not login yet) and enroll the course. You can create new account if you do not have any account yet.
@@ -201,14 +239,24 @@ responses:
   - text: This is a paid course, to enroll the course you need to buy it. Do you want to continue?
   - text: This is a premium course, you need to buy the course to enroll. Do you want to go to the checkout page and buy the course?
   - text: You need to buy the course to enroll. Do you want to go to the checkout page and buy it?
+  utter_succeed:
+  - text: Succeed
+  - text: Action performed succeed
+  utter_failed:
+  - text: Failed. Please check again!
+  - text: Something went wrong!
 actions:
 - action_access_and_perform
+- action_add_category
 - action_approve_course
 - action_buy_course
 - action_check_courses
+- action_delete_category
 - action_detail_course
+- action_edit_category
 - action_enroll_course
 - action_register
+- action_show_categories
 - action_show_courses
 - action_show_my_courses
 - action_show_pending_courses
@@ -219,6 +267,8 @@ actions:
 - utter_greet
 - utter_instruction_take_course
 - utter_register_failed
+- utter_resource_not_found
+- utter_resource_not_found_and_suggest
 - utter_you_are_welcome
 forms:
   login_form:
@@ -234,4 +284,14 @@ forms:
       email:
       - type: from_text
       password:
+      - type: from_text
+  category_form:
+    required_slots:
+      category_name:
+      - type: from_text
+  edit_category_form:
+    required_slots:
+      category_name:
+      - type: from_text
+      new_category_name:
       - type: from_text

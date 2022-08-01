@@ -386,7 +386,6 @@ nlu:
     - So enroll the course for me please
     - I want to enroll [Learn Java Programming | Video Tutorial for Beginners](course_name) course
     - I want to enroll the first course
-    - I want to enroll [Python Django](course_name) course
 - intent: approve_course
   examples: |
     - Please approve this course for me
@@ -522,6 +521,82 @@ nlu:
     - How can I take the course on your website?
     - How can I buy the [Web development with Java Sprint Boot](course_name) course?
     - How can I learn the [Learn C++ Programming](course_name) course?
+- intent: add_category
+  examples: |
+    - Please add category
+    - I want to add more category
+    - Add category please
+    - Insert category please
+    - I want to append more category
+    - I want to add [AI](category_name) category
+    - I want to insert [Machine Learning](category_name) category into database
+    - I want to append [API](category_name) category
+    - I want to add category
+    - I want to add [ML](category_name) category
+- intent: delete_category
+  examples: |
+    - Please delete category
+    - I want to delete this category
+    - Delete category please
+    - Delete this category please
+    - I want to remove this category
+    - I want to delete [AI](category_name) category
+    - I want to remove [Machine Learning](category_name) category into database
+    - I want to delete [API](category_name) category
+    - I want to remove category
+    - I want to delete [ML](category_name) category
+    - I want to delete category
+    - Please delete [Dev](category_name) category
+- intent: edit_category
+  examples: |
+    - Please edit category
+    - I want to edit this category
+    - Edit category please
+    - Edit this category please
+    - I want to update [AI](category_name) category
+    - I want to edit [Machine Learning](category_name) category into database
+    - I want to modify [API](category_name) category
+    - I want to update category
+    - I want to modify [ML](category_name) category
+    - I want to edit category
+- intent: show_categories
+  examples: |
+    - Please list categories
+    - I want to list all categories
+    - Show all categories please
+    - Show all category please
+    - I want to list categories
+    - I want to view all categories
+    - I want to review categories
+    - I want to see all categories
+    - I want to know all categories
+- intent: category_name
+  examples: |
+    - [AI](category_name)
+    - [ML](category_name)
+    - [API](category_name)
+    - [Machine Learning](category_name)
+    - [Web](category_name)
+    - [Mobile](category_name)
+    - [Deep Learning](category_name)
+    - Here is the category name: [Game](category_name)
+    - This is the category name: [REST API](category_name)
+    - [Front End](category_name)
+    - [Back End](category_name)
+    - [Embedded](category_name)
+    - [AI]{"entity": "category_name", "role": "new"}
+    - [ML]{"entity": "category_name", "role": "new"}
+    - [API]{"entity": "category_name", "role": "new"}
+    - [Machine Learning]{"entity": "category_name", "role": "new"}
+    - [Web]{"entity": "category_name", "role": "new"}
+    - [Mobile]{"entity": "category_name", "role": "new"}
+    - [Deep Learning]{"entity": "category_name", "role": "new"}
+    - Here is the category name: [Game]{"entity": "category_name", "role": "new"}
+    - This is the category name: [REST API]{"entity": "category_name", "role": "new"}
+    - [Front End]{"entity": "category_name", "role": "new"}
+    - [Back End]{"entity": "category_name", "role": "new"}
+    - [Embedded]{"entity": "category_name", "role": "new"}
+    - [Ma](category_name)
 - regex: email
   examples: |
     - [_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})

@@ -1200,3 +1200,602 @@ stories:
       - slot_was_set:
           - course_name: API Testing with Python 3 & PyTest, Backend Automation 2022
       - action: action_approve_course
+
+  - story: add_category
+    steps:
+      - intent: add_category
+      - action: action_add_category
+
+  - story: add_category_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: add_category
+      - action: action_add_category
+
+  - story: interactive_story_1
+    steps:
+      - intent: add_category
+      - action: action_add_category
+      - slot_was_set:
+          - pending_action: action_add_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: category_form
+      - active_loop: category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_add_category
+
+  - story: interactive_story_2
+    steps:
+      - intent: add_category
+        entities:
+          - category_name: ML
+      - slot_was_set:
+          - category_name: ML
+      - action: action_add_category
+      - slot_was_set:
+          - pending_action: action_add_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+
+  - story: delete_category
+    steps:
+      - intent: delete_category
+      - action: action_delete_category
+
+  - story: delete_category_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: delete_category
+      - action: action_delete_category
+
+  - story: interactive_story_1
+    steps:
+      - intent: delete_category
+      - action: action_delete_category
+      - slot_was_set:
+          - pending_action: action_delete_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: category_form
+      - active_loop: category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_category
+
+  - story: interactive_story_2
+    steps:
+      - intent: delete_category
+        entities:
+          - category_name: ML
+      - slot_was_set:
+          - category_name: ML
+      - action: action_delete_category
+      - slot_was_set:
+          - pending_action: action_delete_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  - story: interactive_story_1
+    steps:
+      - intent: delete_category
+      - action: action_delete_category
+      - slot_was_set:
+          - pending_action: action_add_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 110|6x1ul0K41SEa8RnkxLYUReitTvSvsIrUDIr8XkzH
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: category_form
+      - active_loop: category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_category
+
+
+  - story: delete_category
+    steps:
+      - intent: delete_category
+      - action: action_delete_category
+
+  - story: delete_category_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: delete_category
+      - action: action_delete_category
+
+  - story: interactive_story_1
+    steps:
+      - intent: delete_category
+      - action: action_delete_category
+      - slot_was_set:
+          - pending_action: action_delete_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: category_form
+      - active_loop: category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_category
+
+  - story: interactive_story_2
+    steps:
+      - intent: delete_category
+        entities:
+          - category_name: ML
+      - slot_was_set:
+          - category_name: ML
+      - action: action_delete_category
+      - slot_was_set:
+          - pending_action: action_delete_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: category_form
+      - active_loop: category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - intent: category_name
+        entities:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - action: category_form
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_category
+      - slot_was_set:
+          - resource_not_found: AI
+      - slot_was_set:
+          - likely_resource: ML
+      - action: utter_resource_not_found_and_suggest
+      - intent: affirm
+      - action: action_delete_category
+
+  - story: interactive_story_3
+    steps:
+      - intent: delete_category
+      - action: action_delete_category
+      - slot_was_set:
+          - pending_action: action_delete_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: category_form
+      - active_loop: category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - intent: category_name
+        entities:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - action: category_form
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_category
+      - slot_was_set:
+          - resource_not_found: AI
+      - slot_was_set:
+          - likely_resource: ML
+      - action: utter_resource_not_found_and_suggest
+      - intent: affirm
+      - action: action_delete_category
+
+  - story: edit_category
+    steps:
+      - intent: edit_category
+      - action: action_edit_category
+
+  - story: edit_category_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: edit_category
+      - action: action_edit_category
+
+  - story: interactive_story_1
+    steps:
+      - intent: edit_category
+      - action: action_edit_category
+      - slot_was_set:
+          - pending_action: action_edit_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: edit_category_form
+      - active_loop: edit_category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: new_category_name
+      - slot_was_set:
+          - new_category_name: ML
+      - slot_was_set:
+          - new_category_name: ML
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_edit_category
+
+
+  - story: show_category
+    steps:
+      - intent: show_categories
+      - action: action_show_categories
+
+  - story: show_category_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_categories
+      - action: action_show_categories
+
+  - story: interactive_story_1
+    steps:
+      - intent: show_categories
+      - action: action_show_categories
+      - slot_was_set:
+          - pending_action: action_show_categories
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  - story: interactive_story_1
+    steps:
+      - intent: edit_category
+      - action: action_edit_category
+      - slot_was_set:
+          - pending_action: action_edit_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 116|xwrJGNoCLnPlDvFB6XBPSw2wOta2ZEfGbzyl8IcA
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: edit_category_form
+      - active_loop: edit_category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - category_name: AI
+      - slot_was_set:
+          - requested_slot: new_category_name
+      - slot_was_set:
+          - new_category_name: Artificial Intelligent
+      - slot_was_set:
+          - new_category_name: Artificial Intelligent
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_edit_category
+      - slot_was_set:
+          - resource_not_found: Edit category please
+      - action: utter_resource_not_found
+
+  - story: interactive_story_1
+    steps:
+      - intent: delete_category
+      - action: action_delete_category
+      - slot_was_set:
+          - pending_action: action_delete_category
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 119|K3gGmS3NYXeYSbcDvn0wgFeq9sr2hoRPauOwqe4W
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: category_form
+      - active_loop: category_form
+      - slot_was_set:
+          - requested_slot: category_name
+      - slot_was_set:
+          - category_name: Ma
+      - slot_was_set:
+          - category_name: Ma
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_category
+      - slot_was_set:
+          - resource_not_found: Ma
+      - slot_was_set:
+          - likely_resource: ML
+      - action: utter_resource_not_found_and_suggest
+      - intent: affirm
+      - action: action_delete_category
