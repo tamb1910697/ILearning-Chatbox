@@ -19,6 +19,9 @@ from requests.models import PreparedRequest
 base_url = "http://127.0.0.1:8000"
 api_url = "http://127.0.0.1:8000/api"
 
+map_resource_types_to_uri = {'category': 'category', 'language': 'language', 'code': 'programming-language'}
+map_resource_types_to_plural_uri = {'category': 'categories', 'language': 'languages', 'code': 'programming-languages'}
+
 
 class PendingAction(Action, ABC):
 
@@ -559,7 +562,7 @@ class ActionApproveCourse(PendingAction):
         return condition, "OK" if condition else "Need to login into admin account"
 
 
-class ActionAddCategory(PendingAction):
+class ActionAddResource(PendingAction):
 
     async def run(self, dispatcher, tracker: Tracker, domain) -> List[
         Dict[Text, Any]]:
@@ -570,29 +573,31 @@ class ActionAddCategory(PendingAction):
 
     @staticmethod
     def _name():
-        return 'action_add_category'
+        return 'action_add_resource'
 
     @staticmethod
     def get_name():
-        return ActionAddCategory._name()
+        return ActionAddResource._name()
 
     @staticmethod
     def perform(dispatcher, tracker: Tracker, domain=None, access_token=None, **kwargs):
         # Not login yet, save pending action and login to continue
         access_token = access_token or tracker.get_slot("access_token")
-        check, message = ActionAddCategory.condition(tracker, access_token=access_token)
+        check, message = ActionAddResource.condition(tracker, access_token=access_token)
         if not check:
             dispatcher.utter_message(message)
-            return [SlotSet("pending_action", ActionAddCategory.get_name()), FollowupAction('login_form')]
+            return [SlotSet("pending_action", ActionAddResource.get_name()), FollowupAction('login_form')]
+        
+        resource_type = map_resource_types_to_uri.get(tracker.get_slot("resource_type"), None)
         # Get the course name user have chosen
-        category_name = tracker.get_slot("likely_resource") or tracker.get_slot("category_name")
-        if category_name is None:
+        resource_name = tracker.get_slot("likely_resource") or tracker.get_slot("resource_name")
+        if resource_name is None or resource_type is None:
             if tracker.get_slot("active_loop") is None:
-                return [FollowupAction("category_form")]
+                return [FollowupAction("resource_form")]
             dispatcher.utter_message(response='utter_not_enough_info')
             return []
         # Add category
-        results = ActionAddCategory._perform(category_name, access_token)
+        results = ActionAddResource._perform(resource_type, resource_name, access_token)
 
         response = json.loads(results.content)
         # Failed
@@ -605,7 +610,7 @@ class ActionAddCategory(PendingAction):
         return [FollowupAction("action_listen")]
 
     @staticmethod
-    def _perform(name, access_token):
+    def _perform(resource_type, name, access_token):
         # Get the course name user have chosen
         if name is None:
             return None
@@ -613,7 +618,7 @@ class ActionAddCategory(PendingAction):
         # Enroll course request
         headers = {'Accept': 'application/json',
                    'Authorization': f'Bearer {access_token}'}
-        results = requests.post(f"{api_url}/admin/category",
+        results = requests.post(f"{api_url}/admin/{resource_type}",
                                 data={'name': name},
                                 headers=headers)
         return results
@@ -625,7 +630,7 @@ class ActionAddCategory(PendingAction):
         return condition, "OK" if condition else "Need to login into admin account"
 
 
-class ActionDeleteCategory(PendingAction):
+class ActionDeleteResource(PendingAction):
 
     async def run(self, dispatcher, tracker: Tracker, domain) -> List[
         Dict[Text, Any]]:
@@ -636,44 +641,45 @@ class ActionDeleteCategory(PendingAction):
 
     @staticmethod
     def _name():
-        return 'action_delete_category'
+        return 'action_delete_resource'
 
     @staticmethod
     def get_name():
-        return ActionDeleteCategory._name()
+        return ActionDeleteResource._name()
 
     @staticmethod
     def perform(dispatcher, tracker: Tracker, domain=None, access_token=None, **kwargs):
         # Not login yet, save pending action and login to continue
         access_token = access_token or tracker.get_slot("access_token")
-        check, message = ActionDeleteCategory.condition(tracker, access_token=access_token)
+        check, message = ActionDeleteResource.condition(tracker, access_token=access_token)
         if not check:
             dispatcher.utter_message(message)
-            return [SlotSet("pending_action", ActionDeleteCategory.get_name()), FollowupAction('login_form')]
+            return [SlotSet("pending_action", ActionDeleteResource.get_name()), FollowupAction('login_form')]
+        resource_type = map_resource_types_to_uri.get(tracker.get_slot("resource_type"), None)
         # Get the course name user have chosen
-        category_name = tracker.get_slot("likely_resource") or tracker.get_slot("category_name")
-        if category_name is None:
+        resource_name = tracker.get_slot("likely_resource") or tracker.get_slot("resource_name")
+        if resource_name is None or resource_type is None:
             if tracker.get_slot("active_loop") is None:
-                return [FollowupAction("category_form")]
+                return [FollowupAction("resource_form")]
             dispatcher.utter_message(response='utter_not_enough_info')
             return []
         headers = {'Accept': 'application/json',
                    'Authorization': f'Bearer {access_token}'}
         # Check if is valid course
         data = json.loads(
-            requests.get(f"{api_url}/admin/category/similar", params={"name": category_name}, headers=headers).content)
+            requests.get(f"{api_url}/admin/{resource_type}/similar", params={"name": resource_name}, headers=headers).content)
         data = data["data"]
         if data["resource"] is None:
             if data["extras"] is not None and len(data["extras"]) > 0:
                 likely_category = data["extras"][0]["name"]
                 # For generalize use resource instead specific model type
-                return [SlotSet("resource_not_found", category_name), SlotSet("likely_resource", likely_category),
+                return [SlotSet("resource_not_found", resource_name), SlotSet("likely_resource", likely_category),
                         FollowupAction("utter_resource_not_found_and_suggest")]
 
-            return [SlotSet("resource_not_found", category_name), FollowupAction("utter_resource_not_found")]
+            return [SlotSet("resource_not_found", resource_name), FollowupAction("utter_resource_not_found")]
 
         # Enroll course
-        results = ActionDeleteCategory._perform(category_name, access_token)
+        results = ActionDeleteResource._perform(resource_type, resource_name, access_token)
 
         response = json.loads(results.content)
         # Failed
@@ -686,7 +692,7 @@ class ActionDeleteCategory(PendingAction):
         return [FollowupAction("action_listen")]
 
     @staticmethod
-    def _perform(name, access_token):
+    def _perform(resource_type, name, access_token):
         # Get the course name user have chosen
         if name is None:
             return None
@@ -694,7 +700,7 @@ class ActionDeleteCategory(PendingAction):
         # Enroll course request
         headers = {'Accept': 'application/json',
                    'Authorization': f'Bearer {access_token}'}
-        results = requests.delete(f"{api_url}/admin/category",
+        results = requests.delete(f"{api_url}/admin/{map_resource_types_to_uri.get(resource_type)}",
                                   data={'name': name},
                                   headers=headers)
         return results
@@ -706,18 +712,18 @@ class ActionDeleteCategory(PendingAction):
         return condition, "OK" if condition else "Need to login into admin account"
 
 
-class ActionShowCategories(PendingAction):
+class ActionShowResources(PendingAction):
 
     def name(self) -> Text:
         return self._name()
 
     @staticmethod
     def _name():
-        return 'action_show_categories'
+        return 'action_show_resources'
 
     @staticmethod
     def get_name():
-        return ActionShowCategories._name()
+        return ActionShowResources._name()
 
     async def run(
             self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
@@ -728,22 +734,30 @@ class ActionShowCategories(PendingAction):
     @staticmethod
     def perform(dispatcher, tracker, domain=None, access_token=None, **kwargs):
         # Not login yet, save pending action and login to continue
-        check, message = ActionShowCategories.condition(tracker, access_token=access_token)
+        check, message = ActionShowResources.condition(tracker, access_token=access_token)
         if not check:
             dispatcher.utter_message(message)
-            return [SlotSet("pending_action", ActionShowCategories._name()), FollowupAction('login_form')]
-
+            return [SlotSet("pending_action", ActionShowResources._name()), FollowupAction('login_form')]
+        
+        resource_type = map_resource_types_to_uri.get(tracker.get_slot("resource_type"), None)
+        resource_types = map_resource_types_to_plural_uri.get(tracker.get_slot("resource_type"), None)
+        if resource_type is None:
+            if tracker.get_slot("active_loop") is None:
+                return [FollowupAction("resource_form")]
+            dispatcher.utter_message(response='utter_not_enough_info')
+            return []
+        
         access_token = access_token or tracker.get_slot("access_token")
         headers = {'Accept': 'application/json',
                    'Authorization': f'Bearer {access_token}'}
-        response = requests.get(f"{api_url}/admin/categories", headers=headers)
+        response = requests.get(f"{api_url}/admin/{resource_types}", headers=headers)
         message = "Something went wrong!"
         recent_resources = []
         table_data = []
         if response.ok:
             data = json.loads(response.content)
             if len(data["data"]) == 0:
-                message = "Sorry there is no categories"
+                message = f"Sorry there is no {resource_types}"
             else:
                 table_data = list(
                     map(lambda x: [
@@ -752,17 +766,17 @@ class ActionShowCategories(PendingAction):
                             {"data": "Edit", "class": "text-center",
                              "json_payload": json.dumps(
                                  {"sender": tracker.sender_id,
-                                  "message": f"/edit_category{{\"category_name\": \"{x['name']}\"}}"})},
+                                  "message": f"/edit_resource{{\"resource_name\": \"{x['name']}\"}}"})},
 
                             {"data": "Delete", "class": "text-center text-red-600",
                              "json_payload": json.dumps(
                                  {"sender": tracker.sender_id,
-                                  "message": f"/delete_category{{\"category_name\": \"{x['name']}\"}}"})}
+                                  "message": f"/delete_resource{{\"resource_name\": \"{x['name']}\"}}"})}
                         ]
                     ],
                         data["data"]))
                 recent_resources = list(map(lambda x: x["name"], data["data"]))
-                message = f"Here are list of categories: "
+                message = f"Here are list of {resource_types}: "
 
         json_message = {"text": message,
                         "table": {"headers": [{"data": "Name", "class": ""}, {"data": "Action", "class": ""}],
@@ -778,7 +792,7 @@ class ActionShowCategories(PendingAction):
         return condition, "OK" if condition else "Need to login into admin account"
 
 
-class ActionEditCategory(PendingAction):
+class ActionEditResource(PendingAction):
 
     async def run(self, dispatcher, tracker: Tracker, domain) -> List[
         Dict[Text, Any]]:
@@ -789,43 +803,44 @@ class ActionEditCategory(PendingAction):
 
     @staticmethod
     def _name():
-        return 'action_edit_category'
+        return 'action_edit_resource'
 
     @staticmethod
     def get_name():
-        return ActionEditCategory._name()
+        return ActionEditResource._name()
 
     @staticmethod
     def perform(dispatcher, tracker: Tracker, domain=None, access_token=None, **kwargs):
         # Not login yet, save pending action and login to continue
         access_token = access_token or tracker.get_slot("access_token")
-        check, message = ActionEditCategory.condition(tracker, access_token=access_token)
+        check, message = ActionEditResource.condition(tracker, access_token=access_token)
         if not check:
             dispatcher.utter_message(message)
-            return [SlotSet("pending_action", ActionEditCategory.get_name()), FollowupAction('login_form')]
+            return [SlotSet("pending_action", ActionEditResource.get_name()), FollowupAction('login_form')]
         # Get the course name user have chosen
-        category_name = tracker.get_slot("likely_resource") or tracker.get_slot("category_name")
-        if category_name is None:
+        resource_type = map_resource_types_to_uri.get(tracker.get_slot("resource_type"), None)
+        resource_name = tracker.get_slot("likely_resource") or tracker.get_slot("resource_name")
+        if resource_name is None or resource_type is None:
             if tracker.get_slot("active_loop") is None:
-                return [FollowupAction("edit_category_form")]
+                return [FollowupAction("edit_resource_form")]
             dispatcher.utter_message(response='utter_not_enough_info')
             return []
         headers = {'Accept': 'application/json',
                    'Authorization': f'Bearer {access_token}'}
         # Check if is valid course
         data = json.loads(
-            requests.get(f"{api_url}/admin/category/similar", params={"name": category_name}, headers=headers).content)
+            requests.get(f"{api_url}/admin/{resource_type}/similar", params={"name": resource_name}, headers=headers).content)
         data = data["data"]
         if data["resource"] is None:
             if data["extras"] is not None and len(data["extras"]) > 0:
                 likely_category = data["extras"][0]["name"]
                 # For generalize use resource instead specific model type
-                return [SlotSet("resource_not_found", category_name), SlotSet("likely_resource", likely_category),
+                return [SlotSet("resource_not_found", resource_name), SlotSet("likely_resource", likely_category),
                         FollowupAction("utter_resource_not_found_and_suggest")]
 
-            return [SlotSet("resource_not_found", category_name), FollowupAction("utter_resource_not_found")]
+            return [SlotSet("resource_not_found", resource_name), FollowupAction("utter_resource_not_found")]
         # Add category
-        results = ActionEditCategory._perform(data["resource"]["id"], tracker.get_slot("new_category_name"),
+        results = ActionEditResource._perform(resource_type, data["resource"]["id"], tracker.get_slot("new_resource_name"),
                                               access_token)
 
         response = json.loads(results.content)
@@ -839,7 +854,7 @@ class ActionEditCategory(PendingAction):
         return [FollowupAction("action_listen")]
 
     @staticmethod
-    def _perform(resource_id, new_name, access_token):
+    def _perform(resource_type, resource_id, new_name, access_token):
         # Get the course name user have chosen
         if resource_id is None:
             return None
@@ -847,7 +862,7 @@ class ActionEditCategory(PendingAction):
         # Enroll course request
         headers = {'Accept': 'application/json',
                    'Authorization': f'Bearer {access_token}'}
-        results = requests.post(f"{api_url}/admin/category",
+        results = requests.post(f"{api_url}/admin/{resource_type}",
                                 data={'id': resource_id, 'name': new_name},
                                 headers=headers)
         return results
@@ -860,8 +875,8 @@ class ActionEditCategory(PendingAction):
 
 
 pending_action_class = [EnrollCourse, ActionShowMyCourses, ActionShowProgressCourse, ActionShowPendingCourses,
-                        ActionApproveCourse, ActionAddCategory, ActionDeleteCategory, ActionEditCategory,
-                        ActionShowCategories]
+                        ActionApproveCourse, ActionAddResource, ActionDeleteResource, ActionEditResource,
+                        ActionShowResources]
 
 
 class ActionAccessAndPerform(Action):

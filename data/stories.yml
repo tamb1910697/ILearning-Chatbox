@@ -1201,24 +1201,24 @@ stories:
           - course_name: API Testing with Python 3 & PyTest, Backend Automation 2022
       - action: action_approve_course
 
-  - story: add_category
+  - story: add_resource
     steps:
-      - intent: add_category
-      - action: action_add_category
+      - intent: add_resource
+      - action: action_add_resource
 
-  - story: add_category_2
+  - story: add_resource_2
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: add_category
-      - action: action_add_category
+      - intent: add_resource
+      - action: action_add_resource
 
   - story: interactive_story_1
     steps:
-      - intent: add_category
-      - action: action_add_category
+      - intent: add_resource
+      - action: action_add_resource
       - slot_was_set:
-          - pending_action: action_add_category
+          - pending_action: action_add_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1243,29 +1243,29 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: category_form
-      - active_loop: category_form
+      - action: resource_form
+      - active_loop: resource_form
       - slot_was_set:
-          - requested_slot: category_name
+          - requested_slot: resource_name
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_add_category
+      - action: action_add_resource
 
   - story: interactive_story_2
     steps:
-      - intent: add_category
+      - intent: add_resource
         entities:
-          - category_name: ML
+          - resource_name: ML
       - slot_was_set:
-          - category_name: ML
-      - action: action_add_category
+          - resource_name: ML
+      - action: action_add_resource
       - slot_was_set:
-          - pending_action: action_add_category
+          - pending_action: action_add_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1292,24 +1292,24 @@ stories:
           - pending_action: null
 
 
-  - story: delete_category
+  - story: delete_resource
     steps:
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
 
-  - story: delete_category_2
+  - story: delete_resource_2
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
 
   - story: interactive_story_1
     steps:
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
       - slot_was_set:
-          - pending_action: action_delete_category
+          - pending_action: action_delete_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1334,29 +1334,29 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: category_form
-      - active_loop: category_form
+      - action: resource_form
+      - active_loop: resource_form
       - slot_was_set:
-          - requested_slot: category_name
+          - requested_slot: resource_name
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_delete_category
+      - action: action_delete_resource
 
   - story: interactive_story_2
     steps:
-      - intent: delete_category
+      - intent: delete_resource
         entities:
-          - category_name: ML
+          - resource_name: ML
       - slot_was_set:
-          - category_name: ML
-      - action: action_delete_category
+          - resource_name: ML
+      - action: action_delete_resource
       - slot_was_set:
-          - pending_action: action_delete_category
+          - pending_action: action_delete_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1384,10 +1384,10 @@ stories:
 
   - story: interactive_story_1
     steps:
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
       - slot_was_set:
-          - pending_action: action_add_category
+          - pending_action: action_delete_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1412,38 +1412,38 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: category_form
-      - active_loop: category_form
+      - action: resource_form
+      - active_loop: resource_form
       - slot_was_set:
-          - requested_slot: category_name
+          - requested_slot: resource_name
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_delete_category
+      - action: action_delete_resource
 
 
-  - story: delete_category
+  - story: delete_resource
     steps:
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
 
-  - story: delete_category_2
+  - story: delete_resource_2
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
 
   - story: interactive_story_1
     steps:
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
       - slot_was_set:
-          - pending_action: action_delete_category
+          - pending_action: action_delete_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1468,29 +1468,29 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: category_form
-      - active_loop: category_form
+      - action: resource_form
+      - active_loop: resource_form
       - slot_was_set:
-          - requested_slot: category_name
+          - requested_slot: resource_name
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_delete_category
+      - action: action_delete_resource
 
   - story: interactive_story_2
     steps:
-      - intent: delete_category
+      - intent: delete_resource
         entities:
-          - category_name: ML
+          - resource_name: ML
       - slot_was_set:
-          - category_name: ML
-      - action: action_delete_category
+          - resource_name: ML
+      - action: action_delete_resource
       - slot_was_set:
-          - pending_action: action_delete_category
+          - pending_action: action_delete_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1515,36 +1515,36 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: category_form
-      - active_loop: category_form
+      - action: resource_form
+      - active_loop: resource_form
       - slot_was_set:
-          - requested_slot: category_name
-      - intent: category_name
+          - requested_slot: resource_name
+      - intent: resource_name
         entities:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
-      - action: category_form
+          - resource_name: AI
+      - action: resource_form
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_delete_category
+      - action: action_delete_resource
       - slot_was_set:
           - resource_not_found: AI
       - slot_was_set:
           - likely_resource: ML
       - action: utter_resource_not_found_and_suggest
       - intent: affirm
-      - action: action_delete_category
+      - action: action_delete_resource
 
   - story: interactive_story_3
     steps:
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
       - slot_was_set:
-          - pending_action: action_delete_category
+          - pending_action: action_delete_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1569,48 +1569,48 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: category_form
-      - active_loop: category_form
+      - action: resource_form
+      - active_loop: resource_form
       - slot_was_set:
-          - requested_slot: category_name
-      - intent: category_name
+          - requested_slot: resource_name
+      - intent: resource_name
         entities:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
-      - action: category_form
+          - resource_name: AI
+      - action: resource_form
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_delete_category
+      - action: action_delete_resource
       - slot_was_set:
           - resource_not_found: AI
       - slot_was_set:
           - likely_resource: ML
       - action: utter_resource_not_found_and_suggest
       - intent: affirm
-      - action: action_delete_category
+      - action: action_delete_resource
 
-  - story: edit_category
+  - story: edit_resource
     steps:
-      - intent: edit_category
-      - action: action_edit_category
+      - intent: edit_resource
+      - action: action_edit_resource
 
-  - story: edit_category_2
+  - story: edit_resource_2
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: edit_category
-      - action: action_edit_category
+      - intent: edit_resource
+      - action: action_edit_resource
 
   - story: interactive_story_1
     steps:
-      - intent: edit_category
-      - action: action_edit_category
+      - intent: edit_resource
+      - action: action_edit_resource
       - slot_was_set:
-          - pending_action: action_edit_category
+          - pending_action: action_edit_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1635,44 +1635,44 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: edit_category_form
-      - active_loop: edit_category_form
+      - action: edit_resource_form
+      - active_loop: edit_resource_form
       - slot_was_set:
-          - requested_slot: category_name
+          - requested_slot: resource_name
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - requested_slot: new_category_name
+          - requested_slot: new_resource_name
       - slot_was_set:
-          - new_category_name: ML
+          - new_resource_name: ML
       - slot_was_set:
-          - new_category_name: ML
+          - new_resource_name: ML
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_edit_category
+      - action: action_edit_resource
 
 
   - story: show_category
     steps:
-      - intent: show_categories
-      - action: action_show_categories
+      - intent: show_resources
+      - action: action_show_resources
 
   - story: show_category_2
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: show_categories
-      - action: action_show_categories
+      - intent: show_resources
+      - action: action_show_resources
 
   - story: interactive_story_1
     steps:
-      - intent: show_categories
-      - action: action_show_categories
+      - intent: show_resources
+      - action: action_show_resources
       - slot_was_set:
-          - pending_action: action_show_categories
+          - pending_action: action_show_resources
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1700,10 +1700,10 @@ stories:
 
   - story: interactive_story_1
     steps:
-      - intent: edit_category
-      - action: action_edit_category
+      - intent: edit_resource
+      - action: action_edit_resource
       - slot_was_set:
-          - pending_action: action_edit_category
+          - pending_action: action_edit_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1728,34 +1728,34 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: edit_category_form
-      - active_loop: edit_category_form
+      - action: edit_resource_form
+      - active_loop: edit_resource_form
       - slot_was_set:
-          - requested_slot: category_name
+          - requested_slot: resource_name
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - category_name: AI
+          - resource_name: AI
       - slot_was_set:
-          - requested_slot: new_category_name
+          - requested_slot: new_resource_name
       - slot_was_set:
-          - new_category_name: Artificial Intelligent
+          - new_resource_name: Artificial Intelligent
       - slot_was_set:
-          - new_category_name: Artificial Intelligent
+          - new_resource_name: Artificial Intelligent
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_edit_category
+      - action: action_edit_resource
       - slot_was_set:
           - resource_not_found: Edit category please
       - action: utter_resource_not_found
 
   - story: interactive_story_1
     steps:
-      - intent: delete_category
-      - action: action_delete_category
+      - intent: delete_resource
+      - action: action_delete_resource
       - slot_was_set:
-          - pending_action: action_delete_category
+          - pending_action: action_delete_resource
       - action: login_form
       - active_loop: login_form
       - slot_was_set:
@@ -1780,22 +1780,597 @@ stories:
           - name: guys
       - slot_was_set:
           - pending_action: null
-      - action: category_form
-      - active_loop: category_form
+      - action: resource_form
+      - active_loop: resource_form
       - slot_was_set:
-          - requested_slot: category_name
+          - requested_slot: resource_name
       - slot_was_set:
-          - category_name: Ma
+          - resource_name: Ma
       - slot_was_set:
-          - category_name: Ma
+          - resource_name: Ma
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
-      - action: action_delete_category
+      - action: action_delete_resource
       - slot_was_set:
           - resource_not_found: Ma
       - slot_was_set:
           - likely_resource: ML
       - action: utter_resource_not_found_and_suggest
       - intent: affirm
-      - action: action_delete_category
+      - action: action_delete_resource
+
+
+  # language
+  # add
+  - story: add_resource
+    steps:
+      - intent: add_resource
+      - action: action_add_resource
+
+  - story: add_resource_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: add_resource
+      - action: action_add_resource
+
+  - story: interactive_story_1
+    steps:
+      - intent: add_resource
+      - action: action_add_resource
+      - slot_was_set:
+          - pending_action: action_add_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: resource_form
+      - active_loop: resource_form
+      - slot_was_set:
+          - requested_slot: resource_name
+      - slot_was_set:
+          - resource_name: English
+      - slot_was_set:
+          - resource_name: English
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_add_resource
+
+  - story: interactive_story_2
+    steps:
+      - intent: add_resource
+        entities:
+          - resource_name: Hindi
+      - slot_was_set:
+          - resource_name: Hindi
+      - action: action_add_resource
+      - slot_was_set:
+          - pending_action: action_add_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  # delete
+  - story: delete_resource
+    steps:
+      - intent: delete_resource
+      - action: action_delete_resource
+
+  - story: delete_resource_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: delete_resource
+      - action: action_delete_resource
+
+  - story: interactive_story_1
+    steps:
+      - intent: delete_resource
+      - action: action_delete_resource
+      - slot_was_set:
+          - pending_action: action_delete_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: resource_form
+      - active_loop: resource_form
+      - slot_was_set:
+          - requested_slot: resource_name
+      - slot_was_set:
+          - resource_name: English
+      - slot_was_set:
+          - resource_name: English
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_resource
+
+  - story: interactive_story_2
+    steps:
+      - intent: delete_resource
+        entities:
+          - resource_name: Hindi
+      - slot_was_set:
+          - resource_name: Hindi
+      - action: action_delete_resource
+      - slot_was_set:
+          - pending_action: action_add_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  # show
+  - story: show_language
+    steps:
+      - intent: show_resources
+      - action: action_show_resources
+
+  - story: show_language_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_resources
+      - action: action_show_resources
+
+  - story: interactive_story_1
+    steps:
+      - intent: show_resources
+      - action: action_show_resources
+      - slot_was_set:
+          - pending_action: action_show_resources
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+
+  # programming language
+  # add
+  - story: add_resource
+    steps:
+      - intent: add_resource
+      - action: action_add_resource
+
+  - story: add_resource_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: add_resource
+      - action: action_add_resource
+
+  - story: interactive_story_1
+    steps:
+      - intent: add_resource
+      - action: action_add_resource
+      - slot_was_set:
+          - pending_action: action_add_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: resource_form
+      - active_loop: resource_form
+      - slot_was_set:
+          - requested_slot: resource_name
+      - slot_was_set:
+          - resource_name: Java
+      - slot_was_set:
+          - resource_name: Java
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_add_resource
+
+  - story: interactive_story_2
+    steps:
+      - intent: add_resource
+        entities:
+          - resource_name: Shell
+      - slot_was_set:
+          - resource_name: Shell
+      - action: action_add_resource
+      - slot_was_set:
+          - pending_action: action_add_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  # delete
+  - story: delete_resource
+    steps:
+      - intent: delete_resource
+      - action: action_delete_resource
+
+  - story: delete_resource_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: delete_resource
+      - action: action_delete_resource
+
+  - story: interactive_story_1
+    steps:
+      - intent: delete_resource
+      - action: action_delete_resource
+      - slot_was_set:
+          - pending_action: action_delete_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: resource_form
+      - active_loop: resource_form
+      - slot_was_set:
+          - requested_slot: resource_name
+      - slot_was_set:
+          - resource_name: C
+      - slot_was_set:
+          - resource_name: C
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_delete_resource
+
+  - story: interactive_story_2
+    steps:
+      - intent: delete_resource
+        entities:
+          - resource_name: Perl
+      - slot_was_set:
+          - resource_name: Perl
+      - action: action_delete_resource
+      - slot_was_set:
+          - pending_action: action_add_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 109|wbB44DhswzLNA3fXaI4SfLcALt0zOg5fFZOzRW86
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  # show
+  - story: show_programming_language
+    steps:
+      - intent: show_resources
+      - action: action_show_resources
+
+  - story: show_programming_language_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: show_resources
+      - action: action_show_resources
+
+  - story: interactive_story_1
+    steps:
+      - intent: show_resources
+      - action: action_show_resources
+      - slot_was_set:
+          - pending_action: action_show_resources
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 108|ARL5lLN4d8152C1CWMhyKV1b2sB5maprQtXBDgIK
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  - story: interactive_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: add_resource
+        entities:
+          - resource_type: category
+      - slot_was_set:
+          - resource_type: category
+      - action: action_add_resource
+      - slot_was_set:
+          - pending_action: action_add_resource
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 123|1OEncT9bcdVyKl3ItShsZNugBhb4PUTpPYhRnvki
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - action: resource_form
+      - active_loop: resource_form
+      - slot_was_set:
+          - resource_type: category
+      - slot_was_set:
+          - requested_slot: resource_name
+      - slot_was_set:
+          - resource_name: Game
+      - slot_was_set:
+          - resource_name: Game
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_add_resource
+
+  - story: interactive_story_2
+    steps:
+      - intent: show_resources
+        entities:
+          - resource_type: language
+      - slot_was_set:
+          - resource_type: language
+      - action: action_show_resources
+      - slot_was_set:
+          - pending_action: action_show_resources
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 126|L88dUDbhGqnlh9r13HsFWkgyYkpguJQ1imH2Q1BP
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - slot_was_set:
+          - recent_resources:
+              - German
+              - Hindi
+              - Chinese
+              - Japenese
+              - Vietnamese
+              - English
+      - intent: show_resources
+        entities:
+          - resource_type: code
+      - slot_was_set:
+          - resource_type: code
+      - action: action_show_resources
+      - slot_was_set:
+          - recent_resources:
+              - PHP
+              - C++
+              - Python
+              - Java
+      - intent: show_resources
+        entities:
+          - resource_type: category
+      - slot_was_set:
+          - resource_type: category
+      - action: action_show_resources
+      - slot_was_set:
+          - recent_resources:
+              - Game
+              - Mobile
+              - Web
+              - Design
+              - Development

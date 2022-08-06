@@ -521,82 +521,259 @@ nlu:
     - How can I take the course on your website?
     - How can I buy the [Web development with Java Sprint Boot](course_name) course?
     - How can I learn the [Learn C++ Programming](course_name) course?
-- intent: add_category
+- intent: add_resource
   examples: |
-    - Please add category
-    - I want to add more category
-    - Add category please
-    - Insert category please
-    - I want to append more category
-    - I want to add [AI](category_name) category
-    - I want to insert [Machine Learning](category_name) category into database
-    - I want to append [API](category_name) category
-    - I want to add category
-    - I want to add [ML](category_name) category
-- intent: delete_category
+    - Please add [category](resource_type)
+    - I want to add more [category](resource_type)
+    - Add [category](resource_type) please
+    - Insert [category](resource_type) please
+    - I want to append more [category](resource_type)
+    - I want to add [AI](resource_name) [category](resource_type)
+    - I want to insert [Machine Learning](resource_name) [category](resource_type) into database
+    - I want to append [API](resource_name) [category](resource_type)
+    - Please add [language](resource_type)
+    - I want to add more [language](resource_type)
+    - Add [language](resource_type) please
+    - Insert [language](resource_type) please
+    - I want to append more [language](resource_type)
+    - I want to add [Hindi](resource_name) [language](resource_type)
+    - I want to insert [Japanese](resource_name) [language](resource_type) into database
+    - I want to append [English](resource_name) [language](resource_type)
+    - I want to add [category](resource_type)
+    - I want to add [ML](resource_name) [category](resource_type)
+    - Please add [programming_language](resource_type)
+    - I want to add more [programming_language](resource_type)
+    - Add [programming_language](resource_type) please
+    - Insert [programming_language](resource_type) please
+    - I want to append more [programming_language](resource_type)
+    - I want to add [Perl](resource_name) [programming_language](resource_type)
+    - I want to insert [Java](resource_name) [programming_language](resource_type) into database
+    - I want to append [Python](resource_name) [programming_language](resource_type)
+    - Add [category](resource_type) please
+- intent: delete_resource
   examples: |
-    - Please delete category
-    - I want to delete this category
-    - Delete category please
-    - Delete this category please
-    - I want to remove this category
-    - I want to delete [AI](category_name) category
-    - I want to remove [Machine Learning](category_name) category into database
-    - I want to delete [API](category_name) category
-    - I want to remove category
-    - I want to delete [ML](category_name) category
-    - I want to delete category
-    - Please delete [Dev](category_name) category
-- intent: edit_category
+    - Please delete [category](resource_type)
+    - I want to delete this [category](resource_type)
+    - Delete [category](resource_type) please
+    - Delete this [category](resource_type) please
+    - I want to remove this [category](resource_type)
+    - I want to delete [AI](resource_name) [category](resource_type)
+    - I want to remove [Machine Learning](resource_name) [category](resource_type) into database
+    - I want to delete [API](resource_name) [category](resource_type)
+    - I want to remove [category](resource_type)
+    - I want to delete [ML](resource_name) [category](resource_type)
+    - I want to delete [category](resource_type)
+    - Please delete [Dev](resource_name) [category](resource_type)
+    - I want to delete this [language](resource_type)
+    - Delete [language](resource_type) please
+    - Delete this [language](resource_type) please
+    - I want to remove this [language](resource_type)
+    - I want to delete [Hindi](resource_name) [language](resource_type)
+    - I want to remove [Germany](resource_name) [language](resource_type) into database
+    - I want to delete [Chines](resource_name) [language](resource_type)
+    - I want to remove [language](resource_type)
+    - I want to delete [Kotlin](resource_name) [programming language](resource_type)
+    - I want to remove [Machine Learning](resource_name) [programming language](resource_type) into database
+    - I want to delete [C](resource_name) [programming language](resource_type)
+    - I want to remove [programming language](resource_type)
+    - I want to delete [Perl](resource_name) [programming language](resource_type)
+    - I want to delete [programming language](resource_type)
+    - Please delete [Dev](resource_name) [programming language](resource_type)
+    - I want to delete this [programming language](resource_type)
+    - Delete [programming language](resource_type) please
+- intent: edit_resource
   examples: |
-    - Please edit category
-    - I want to edit this category
-    - Edit category please
-    - Edit this category please
-    - I want to update [AI](category_name) category
-    - I want to edit [Machine Learning](category_name) category into database
-    - I want to modify [API](category_name) category
-    - I want to update category
-    - I want to modify [ML](category_name) category
-    - I want to edit category
-- intent: show_categories
+    - Please edit [category](resource_type)
+    - I want to edit this [category](resource_type)
+    - Edit [category](resource_type) please
+    - Edit this [category](resource_type) please
+    - I want to update [AI](resource_name) [category](resource_type)
+    - I want to edit [Machine Learning](resource_name) [category](resource_type) into database
+    - I want to modify [API](resource_name) [category](resource_type)
+    - I want to update [category](resource_type)
+    - I want to modify [ML](resource_name) [category](resource_type)
+    - I want to edit [category](resource_type)
+- intent: show_resources
   examples: |
-    - Please list categories
-    - I want to list all categories
-    - Show all categories please
-    - Show all category please
-    - I want to list categories
-    - I want to view all categories
-    - I want to review categories
-    - I want to see all categories
-    - I want to know all categories
-- intent: category_name
+    - Please list [categories]{"entity": "resource_type", "value": "category"}
+    - I want to list all [categories]{"entity": "resource_type", "value": "category"}
+    - Show all [categories]{"entity": "resource_type", "value": "category"} please
+    - Show all [category](resource_type) please
+    - I want to list [categories]{"entity": "resource_type", "value": "category"}
+    - I want to view all [categories]{"entity": "resource_type", "value": "category"}
+    - I want to review [categories]{"entity": "resource_type", "value": "category"}
+    - I want to see all [categories]{"entity": "resource_type", "value": "category"}
+    - I want to know all [categories]{"entity": "resource_type", "value": "category"}
+    - Show all [language](resource_type) please
+    - I want to list [languages]{"entity": "resource_type", "value": "language"}
+    - I want to view all [languages]{"entity": "resource_type", "value": "language"}
+    - I want to review [languages]{"entity": "resource_type", "value": "language"}
+    - I want to see all [languages]{"entity": "resource_type", "value": "language"}
+    - I want to know all [languages]{"entity": "resource_type", "value": "language"}
+    - I want to list [programming languages]{"entity": "resource_type", "value": "code"}
+    - I want to view all [pro languages]{"entity": "resource_type", "value": "code"}
+    - I want to review [coding languages]{"entity": "resource_type", "value": "code"}
+    - I want to see all [programming language]{"entity": "resource_type", "value": "code"}
+    - I want to know all [computer languages]{"entity": "resource_type", "value": "code"}
+    - Show all [programming-language]{"entity": "resource_type", "value": "code"} please
+    - I want to list [code languages]{"entity": "resource_type", "value": "code"}
+    - I want to view all [code-language]{"entity": "resource_type", "value": "code"}
+    - I want to review [coding-languages]{"entity": "resource_type", "value": "code"}
+    - I want to see all [code-languages]{"entity": "resource_type", "value": "code"}
+    - Show [languages]{"entity": "resource_type", "value": "language"} please
+    - Show [coding languages]{"entity": "resource_type", "value": "code"} please
+    - List [categories]{"entity": "resource_type", "value": "category"} please
+- intent: resource_name
   examples: |
-    - [AI](category_name)
-    - [ML](category_name)
-    - [API](category_name)
-    - [Machine Learning](category_name)
-    - [Web](category_name)
-    - [Mobile](category_name)
-    - [Deep Learning](category_name)
-    - Here is the category name: [Game](category_name)
-    - This is the category name: [REST API](category_name)
-    - [Front End](category_name)
-    - [Back End](category_name)
-    - [Embedded](category_name)
-    - [AI]{"entity": "category_name", "role": "new"}
-    - [ML]{"entity": "category_name", "role": "new"}
-    - [API]{"entity": "category_name", "role": "new"}
-    - [Machine Learning]{"entity": "category_name", "role": "new"}
-    - [Web]{"entity": "category_name", "role": "new"}
-    - [Mobile]{"entity": "category_name", "role": "new"}
-    - [Deep Learning]{"entity": "category_name", "role": "new"}
-    - Here is the category name: [Game]{"entity": "category_name", "role": "new"}
-    - This is the category name: [REST API]{"entity": "category_name", "role": "new"}
-    - [Front End]{"entity": "category_name", "role": "new"}
-    - [Back End]{"entity": "category_name", "role": "new"}
-    - [Embedded]{"entity": "category_name", "role": "new"}
-    - [Ma](category_name)
+    - [AI](resource_name)
+    - [ML](resource_name)
+    - [API](resource_name)
+    - [Machine Learning](resource_name)
+    - [Web](resource_name)
+    - [Mobile](resource_name)
+    - [Deep Learning](resource_name)
+    - Here is the category name: [Game](resource_name)
+    - This is the category name: [REST API](resource_name)
+    - [Front End](resource_name)
+    - [Back End](resource_name)
+    - [Embedded](resource_name)
+    - [AI]{"entity": "resource_name", "role": "new"}
+    - [ML]{"entity": "resource_name", "role": "new"}
+    - [API]{"entity": "resource_name", "role": "new"}
+    - [Machine Learning]{"entity": "resource_name", "role": "new"}
+    - [Web]{"entity": "resource_name", "role": "new"}
+    - [Mobile]{"entity": "resource_name", "role": "new"}
+    - [Deep Learning]{"entity": "resource_name", "role": "new"}
+    - Here is the category name: [Game]{"entity": "resource_name", "role": "new"}
+    - This is the category name: [REST API]{"entity": "resource_name", "role": "new"}
+    - [Front End]{"entity": "resource_name", "role": "new"}
+    - [Back End]{"entity": "resource_name", "role": "new"}
+    - [Embedded]{"entity": "resource_name", "role": "new"}
+    - [Ma](resource_name)
+    - [Afrikaans](resource_name)
+    - [Albanian](resource_name)
+    - [Arabic](resource_name)
+    - [Assamese](resource_name)
+    - [Azeri](resource_name)
+    - [Belarusian](resource_name)
+    - [Bengali](resource_name)
+    - [Bosnian](resource_name)
+    - [Bulgarian](resource_name)
+    - [Catalan](resource_name)
+    - [Chinese](resource_name)
+    - [Croatian](resource_name)
+    - [Czech](resource_name)
+    - [Danish](resource_name)
+    - [Dari](resource_name)
+    - [Divehi](resource_name)
+    - [Dutch](resource_name)
+    - [English](resource_name)
+    - [Estonian](resource_name)
+    - [Filipino](resource_name)
+    - [Finnish](resource_name)
+    - [French](resource_name)
+    - [Galician](resource_name)
+    - [Georgian](resource_name)
+    - [German](resource_name)
+    - [Greek](resource_name)
+    - [Gujarati](resource_name)
+    - [Hausa](resource_name)
+    - [Hebrew](resource_name)
+    - [Hindi](resource_name)
+    - [Hungarian](resource_name)
+    - [Igbo](resource_name)
+    - [Indonesian](resource_name)
+    - [isiXhosa](resource_name)
+    - [Italian](resource_name)
+    - [Japanese](resource_name)
+    - [Kannada](resource_name)
+    - [Kazakh](resource_name)
+    - [Khmer](resource_name)
+    - [Kinyarwanda](resource_name)
+    - [Kiswahili](resource_name)
+    - [Korean](resource_name)
+    - [Kurdish](resource_name)
+    - [Lao](resource_name)
+    - [Latvian](resource_name)
+    - [Lithuanian](resource_name)
+    - [Macedonian](resource_name)
+    - [Malay](resource_name)
+    - [Malayalam](resource_name)
+    - [Maltese](resource_name)
+    - [Marathi](resource_name)
+    - [Maori](resource_name)
+    - [Mongolian](resource_name)
+    - [Nepali](resource_name)
+    - [Norwegian](resource_name)
+    - [Pashto](resource_name)
+    - [Persian](resource_name)
+    - [Polish](resource_name)
+    - [Portuguese](resource_name)
+    - [Portuguese-Brazilian](resource_name)
+    - [Punjabi](resource_name)
+    - [Romanian](resource_name)
+    - [Russian](resource_name)
+    - [Serbian](resource_name)
+    - [Sinhala](resource_name)
+    - [Slovak](resource_name)
+    - [Slovenian](resource_name)
+    - [Somali](resource_name)
+    - [Spanish](resource_name)
+    - [Swedish](resource_name)
+    - [Tamil](resource_name)
+    - [Telugu](resource_name)
+    - [Thai](resource_name)
+    - [Tibetan](resource_name)
+    - [Turkish](resource_name)
+    - [Ukrainian](resource_name)
+    - [Urdu](resource_name)
+    - [Uzbek](resource_name)
+    - [Vietnamese](resource_name)
+    - [Yoruba](resource_name)
+    - [Zulu](resource_name)
+    - [C](resource_name)
+    - [C++](resource_name)
+    - [Java](resource_name)
+    - [PHP](resource_name)
+    - [Javascript](resource_name)
+    - [Kotlin](resource_name)
+    - [Python](resource_name)
+    - [C#](resource_name)
+    - [Swift](resource_name)
+    - [Objective-C](resource_name)
+    - [Go](resource_name)
+    - [R](resource_name)
+    - [Dart](resource_name)
+    - [Fortran](resource_name)
+    - [Perl](resource_name)
+    - [Bash](resource_name)
+    - [Julia](resource_name)
+    - [Lua](resource_name)
+    - [Matlab](resource_name)
+    - [Ruby](resource_name)
+    - [Game]{"entity": "resource_name", "role": "new"}
+- synonym: category
+  examples: |
+    - categories
+    - categorical
+- synonym: language
+  examples: |
+    - languages
+- synonym: code
+  examples: |
+    - programming language
+    - programming languages
+    - programming-language
+    - coding language
+    - computer language
+    - code language
+    - pro languages
+    - coding languages
+    - computer languages
+    - code languages
+    - code-language
+    - coding-languages
+    - code-languages
 - regex: email
   examples: |
     - [_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})

@@ -4,19 +4,18 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - about_us
-- add_category
+- add_resource
 - affirm
 - approve_course
 - ask_apply_online
 - ask_how_to_take_course
 - ask_placements
 - bot_challenge
-- category_name
 - courses
-- delete_category
+- delete_resource
 - deny
 - detail_course
-- edit_category
+- edit_resource
 - email
 - enroll_course
 - goodbye
@@ -28,17 +27,19 @@ intents:
 - nlu_fallback
 - password
 - register
-- show_categories
+- resource_name
 - show_courses
 - show_my_courses
 - show_pending_courses
 - show_progress_course
+- show_resources
 - thankyou
 - username
 entities:
-- category_name
-- email
 - password
+- resource_type
+- resource_name
+- email
 - course_name
 - course_keyword
 - username
@@ -50,6 +51,14 @@ slots:
     values:
     - none
     - action_enroll_course
+  resource_type:
+    type: categorical
+    influence_conversation: false
+    values:
+    - none
+    - category
+    - language
+    - programming_language
   requested_slot:
     type: text
     influence_conversation: true
@@ -83,10 +92,10 @@ slots:
   name:
     type: text
     influence_conversation: true
-  category_name:
+  resource_name:
     type: text
     influence_conversation: true
-  new_category_name:
+  new_resource_name:
     type: text
     influence_conversation: true
   likely_resource:
@@ -173,14 +182,14 @@ responses:
   - text: ILearning is website of multi national online course including thousands of high quality of professors has public courses in various topics that can satisfy the demands of the hardest customer. If you interested in learning new things, I can help you to do that. Just say what you want to learn and I will find suitable course for you.
   utter_first_access:
   - text: Please first login to our service to use it.
-  utter_ask_category_name:
-  - text: 'Please tell me category name:'
-  - text: 'Please tell me the name for the category:'
-  - text: 'Please tell me name of the category:'
-  utter_ask_new_category_name:
-  - text: 'Please tell me new name:'
-  - text: 'Please tell me the new name for the category:'
-  - text: 'Please tell me new name of the category:'
+  utter_ask_resource_name:
+  - text: 'Please tell me {resource_type} name:'
+  - text: 'Please tell me the name for the {resource_type}:'
+  - text: 'Please tell me name of the {resource_type}:'
+  utter_ask_new_resource_name:
+  - text: 'Please tell me new {resource_type} name:'
+  - text: 'Please tell me the new name for the {resource_type}:'
+  - text: 'Please tell me new name of the {resource_type}:'
   utter_ask_email:
   - text: 'Please tell me your email:'
   - text: 'Please tell me your email address:'
@@ -247,20 +256,20 @@ responses:
   - text: Something went wrong!
 actions:
 - action_access_and_perform
-- action_add_category
+- action_add_resource
 - action_approve_course
 - action_buy_course
 - action_check_courses
-- action_delete_category
+- action_delete_resource
 - action_detail_course
-- action_edit_category
+- action_edit_resource
 - action_enroll_course
 - action_register
-- action_show_categories
 - action_show_courses
 - action_show_my_courses
 - action_show_pending_courses
 - action_show_progress_course
+- action_show_resources
 - utter_ask_buy_course
 - utter_course_not_found_and_suggest
 - utter_goodbye
@@ -285,13 +294,15 @@ forms:
       - type: from_text
       password:
       - type: from_text
-  category_form:
+  resource_form:
     required_slots:
-      category_name:
+      resource_type:
       - type: from_text
-  edit_category_form:
+      resource_name:
+      - type: from_text
+  edit_resource_form:
     required_slots:
-      category_name:
+      resource_name:
       - type: from_text
-      new_category_name:
+      new_resource_name:
       - type: from_text
