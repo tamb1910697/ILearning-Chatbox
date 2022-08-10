@@ -587,7 +587,7 @@ class ActionAddResource(PendingAction):
         if not check:
             dispatcher.utter_message(message)
             return [SlotSet("pending_action", ActionAddResource.get_name()), FollowupAction('login_form')]
-        
+
         resource_type = map_resource_types_to_uri.get(tracker.get_slot("resource_type"), None)
         # Get the course name user have chosen
         resource_name = tracker.get_slot("likely_resource") or tracker.get_slot("resource_name")
@@ -667,7 +667,8 @@ class ActionDeleteResource(PendingAction):
                    'Authorization': f'Bearer {access_token}'}
         # Check if is valid course
         data = json.loads(
-            requests.get(f"{api_url}/admin/{resource_type}/similar", params={"name": resource_name}, headers=headers).content)
+            requests.get(f"{api_url}/admin/{resource_type}/similar", params={"name": resource_name},
+                         headers=headers).content)
         data = data["data"]
         if data["resource"] is None:
             if data["extras"] is not None and len(data["extras"]) > 0:
@@ -738,7 +739,7 @@ class ActionShowResources(PendingAction):
         if not check:
             dispatcher.utter_message(message)
             return [SlotSet("pending_action", ActionShowResources._name()), FollowupAction('login_form')]
-        
+
         resource_type = map_resource_types_to_uri.get(tracker.get_slot("resource_type"), None)
         resource_types = map_resource_types_to_plural_uri.get(tracker.get_slot("resource_type"), None)
         if resource_type is None:
@@ -746,7 +747,7 @@ class ActionShowResources(PendingAction):
                 return [FollowupAction("resource_form")]
             dispatcher.utter_message(response='utter_not_enough_info')
             return []
-        
+
         access_token = access_token or tracker.get_slot("access_token")
         headers = {'Accept': 'application/json',
                    'Authorization': f'Bearer {access_token}'}
@@ -829,7 +830,8 @@ class ActionEditResource(PendingAction):
                    'Authorization': f'Bearer {access_token}'}
         # Check if is valid course
         data = json.loads(
-            requests.get(f"{api_url}/admin/{resource_type}/similar", params={"name": resource_name}, headers=headers).content)
+            requests.get(f"{api_url}/admin/{resource_type}/similar", params={"name": resource_name},
+                         headers=headers).content)
         data = data["data"]
         if data["resource"] is None:
             if data["extras"] is not None and len(data["extras"]) > 0:
@@ -840,7 +842,8 @@ class ActionEditResource(PendingAction):
 
             return [SlotSet("resource_not_found", resource_name), FollowupAction("utter_resource_not_found")]
         # Add category
-        results = ActionEditResource._perform(resource_type, data["resource"]["id"], tracker.get_slot("new_resource_name"),
+        results = ActionEditResource._perform(resource_type, data["resource"]["id"],
+                                              tracker.get_slot("new_resource_name"),
                                               access_token)
 
         response = json.loads(results.content)
@@ -874,9 +877,72 @@ class ActionEditResource(PendingAction):
         return condition, "OK" if condition else "Need to login into admin account"
 
 
+class ActionShowCourseStatistic(PendingAction):
+
+    def name(self) -> Text:
+        return self._name()
+
+    @staticmethod
+    def _name():
+        return 'action_show_course_statistic'
+
+    @staticmethod
+    def get_name():
+        return ActionShowCourseStatistic._name()
+
+    async def run(
+            self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        return self.perform(dispatcher, tracker, domain)
+
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def perform(dispatcher, tracker, domain=None, access_token=None, **kwargs):
+        # Not login yet, save pending action and login to continue
+        check, message = ActionShowCourseStatistic.condition(tracker, access_token=access_token)
+        if not check:
+            dispatcher.utter_message(message)
+            return [SlotSet("pending_action", ActionShowCourseStatistic._name()), FollowupAction('login_form')]
+
+        access_token = access_token or tracker.get_slot("access_token")
+        headers = {'Accept': 'application/json',
+                   'Authorization': f'Bearer {access_token}'}
+        response = requests.get(f"{api_url}/author/courses/statistic", headers=headers)
+        message = "Something went wrong!"
+        table_data = []
+        if response.ok:
+            data = json.loads(response.content)
+            if len(data["data"]) == 0:
+                message = f"Sorry you have not create any course yet"
+            else:
+                table_data = list(
+                    map(lambda x: [
+                        [{"data": x["name"], "class": ""}],
+                        [{"data": default(x['earned'], 0), "class": "text-center"}],
+                        [{"data": default(x['enroll'], 0), "class": "text-center"}],
+                        [{"data": default(x['rating'], 'No rating'), "class": "text-center"}],
+                    ],
+                        data["data"]))
+                message = f"Here are your courses statistic: "
+
+        json_message = {"text": message,
+                        "table": {
+                            "headers": [{"data": "Name"}, {"data": "Earned", "class": "text-center"}, {"data": "Enroll", "class": "text-center"}, {"data": "Rating"}],
+                            "data": table_data}}
+        dispatcher.utter_message(json_message=json_message)
+
+        return []
+
+    @staticmethod
+    def condition(tracker, **kwargs):
+        access_token = kwargs.get("access_token", None)
+        condition = is_author(tracker, access_token)
+        return condition, "OK" if condition else "Need to login into author or admin account"
+
+
 pending_action_class = [EnrollCourse, ActionShowMyCourses, ActionShowProgressCourse, ActionShowPendingCourses,
                         ActionApproveCourse, ActionAddResource, ActionDeleteResource, ActionEditResource,
-                        ActionShowResources]
+                        ActionShowResources, ActionShowCourseStatistic]
 
 
 class ActionAccessAndPerform(Action):
@@ -989,3 +1055,29 @@ def is_admin(tracker, access_token=None):
         return True
 
     return False
+
+
+def is_author(tracker, access_token=None):
+    """
+    Check if a course name in tracker is valid
+    :param tracker: tracker of conversation
+    :param access_token: the token after login
+    :return: bool, course (True and the course if valid and False, the likely course with similar name)
+    """
+    access_token = access_token or tracker.get_slot("access_token")
+    if access_token is None:
+        return False
+    # Check if is valid course
+    headers = {'Accept': 'application/json',
+               'Authorization': f'Bearer {access_token}'}
+    data = json.loads(requests.get(f"{api_url}/is-author", headers=headers).content)["data"]
+    if data:
+        return True
+
+    return False
+
+
+def default(value, other):
+    if value is not None:
+        return value
+    return other

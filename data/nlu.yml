@@ -356,6 +356,20 @@ nlu:
     - View pending courses
     - Show unapproved courses
     - Please show pending courses
+- intent: show_course_statistic
+  examples: |
+    - Please show courses statistic
+    - Please show all statistic about my courses
+    - Show all courses information
+    - Check courses revenue
+    - View revenue of my courses
+    - Show activities of my courses
+    - List courses rating
+    - Show rating of courses
+    - Show revenue from my courses
+    - Please show statistic infomation about my courses
+    - Show statistic courses please
+    - Show statistic
 - intent: enroll_course
   examples: |
     - Please take this course for me
@@ -470,7 +484,6 @@ nlu:
     - [rose@gmail.com](email)
     - [rose12@gmail.com](email)
     - [jenie@gmail.com](email)
-    - [guys@gmail.com](email)
 - intent: password
   examples: |
     - [1234](password)
@@ -486,7 +499,6 @@ nlu:
     - [Iloveyou](password)
     - [123456](password)
     - [abc123](password)
-    - [password123](password)
 - intent: register
   examples: |
     - Please create an account for me
@@ -549,7 +561,6 @@ nlu:
     - I want to add [Perl](resource_name) [programming_language](resource_type)
     - I want to insert [Java](resource_name) [programming_language](resource_type) into database
     - I want to append [Python](resource_name) [programming_language](resource_type)
-    - Add [category](resource_type) please
 - intent: delete_resource
   examples: |
     - Please delete [category](resource_type)
@@ -761,19 +772,19 @@ nlu:
     - languages
 - synonym: code
   examples: |
-    - programming language
     - programming languages
-    - programming-language
-    - coding language
-    - computer language
-    - code language
     - pro languages
     - coding languages
+    - programming language
     - computer languages
+    - programming-language
     - code languages
     - code-language
     - coding-languages
     - code-languages
+    - coding language
+    - computer language
+    - code language
 - regex: email
   examples: |
     - [_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})

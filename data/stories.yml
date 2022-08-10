@@ -2374,3 +2374,123 @@ stories:
               - Web
               - Design
               - Development
+
+  - story: interactive_story_3
+    steps:
+      - intent: show_course_statistic
+      - action: action_show_course_statistic
+      - slot_was_set:
+          - pending_action: action_show_course_statistic
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 126|L88dUDbhGqnlh9r13HsFWkgyYkpguJQ1imH2Q1BP
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+      - intent: show_course_statistic
+      - action: action_show_course_statistic
+
+  - story: interactive_story_1
+    steps:
+      - intent: show_course_statistic
+      - action: action_show_course_statistic
+      - slot_was_set:
+          - pending_action: action_show_course_statistic
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+
+  - story: interactive_story_2
+    steps:
+      - intent: show_course_statistic
+      - action: action_show_course_statistic
+      - slot_was_set:
+          - pending_action: action_show_course_statistic
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 131|dUk30JLp7l58IZhISOpToyAXr3n4d3d9eaovQENB
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
+
+  - story: interactive_story_4
+    steps:
+      - intent: show_course_statistic
+      - action: action_show_course_statistic
+      - slot_was_set:
+          - pending_action: action_show_course_statistic
+      - action: login_form
+      - active_loop: login_form
+      - slot_was_set:
+          - requested_slot: email
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - email: guys@gmail.com
+      - slot_was_set:
+          - requested_slot: password
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - password: password123
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_access_and_perform
+      - slot_was_set:
+          - access_token: 132|Iqcdbpu0XvGU5523iXjWRWWvAyOzQhLwMDY1FEFe
+      - slot_was_set:
+          - name: guys
+      - slot_was_set:
+          - pending_action: null
