@@ -1,0 +1,12 @@
+name: rasa
+autocreate: true
+command: bash
+image: okteto.dev/rasa-ilearn-server-okteto:latest
+volumes:
+- /root/.cache/pip
+sync:
+- .:/app
+forward:
+- 8080:8080
+reverse:
+- 9000:9000
