@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-  rasa:
+  rasa-ilearn:
     image: rasa-ilearn-server-okteto:latest
     working_dir: /app
     build: "./"
@@ -15,7 +15,7 @@ services:
     networks:
       - all
 
-  rasa-actions:
+  rasa-ilearn-actions:
     image: rasa-ilearn-server-okteto:latest
     working_dir: /app
     build: './'
@@ -28,7 +28,7 @@ services:
     networks:
       - all
 
-  db:
+  db-ilearn:
     container_name: postgres_demo
     image: postgres:latest
     environment:
