@@ -16,8 +16,8 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet, ActionReverted, AllSlotsReset, FollowupAction
 from requests.models import PreparedRequest
 
-base_url = "http://127.0.0.1:8000"
-api_url = "http://127.0.0.1:8000/api"
+base_url = "https://ilearning.fly.dev"
+api_url = "https://ilearning.fly.dev/api"
 
 map_resource_types_to_uri = {'category': 'category', 'language': 'language', 'code': 'programming-language'}
 map_resource_types_to_plural_uri = {'category': 'categories', 'language': 'languages', 'code': 'programming-languages'}
